@@ -497,5 +497,11 @@ namespace SuperGeroy.Libs
             }
             return r;
         }
+
+        public static string AlphabetEN(int index)
+        {
+            string a = "abcdefghijklmnopqrstuvwxyz";
+            return a[index].ToString();
+        }
     }
 }

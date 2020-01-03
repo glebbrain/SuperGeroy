@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -155,168 +156,6 @@ namespace SuperGeroy
                 button1.Enabled = true;
             }
         }
-        #endregion
-
-        #region Текст
-
-        /// <summary>
-        /// Выполнить
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void button1_Click(object sender, EventArgs e)
-        {
-            if (textBox1.Text !="")
-            {
-                // Разбить текст на строки по символу или тексту
-                // find: textBox3 and comboBox2
-                // replace: textBox4 and comboBox3
-
-                string TextJoin = (textBox4.Text.Trim() != "" ? textBox4.Text : this.ReplaceSpecSimbol);
-
-                if (comboBox1.SelectedIndex == 1)
-                {
-                    if (textBox3.Text.Length > 0)
-                    {
-                        if (textBox4.Text.Length > 0)
-                        {
-                            WriteResult(String.Join(textBox4.Text, textBox1.Text.Split(new string[] { textBox3.Text }, StringSplitOptions.RemoveEmptyEntries)));
-                        }
-                        else if(comboBox3.Text.Length > 0 && comboBox3.Text != "Спец. символы")
-                        {
-                            WriteResult(String.Join(this.ReplaceSpecSimbol, textBox1.Text.Split(new string[] { textBox3.Text }, StringSplitOptions.RemoveEmptyEntries)));
-                        }
-                        
-                    }
-                    else if (comboBox2.Text.Length > 0 && comboBox2.Text != "Спец. символы")
-                    {
-                        if (textBox4.Text.Length > 0)
-                        {
-                            WriteResult(String.Join(textBox4.Text, textBox1.Text.Split(new string[] { this.FindSpecSimbol }, StringSplitOptions.RemoveEmptyEntries)));
-                        }
-                        else if (comboBox3.Text.Length > 0 && comboBox3.Text != "Спец. символы")
-                        {
-                            WriteResult(String.Join(this.ReplaceSpecSimbol, textBox1.Text.Split(new string[] { this.FindSpecSimbol }, StringSplitOptions.RemoveEmptyEntries)));
-                        }
-                       
-                    }
-                }
-                // Добавить текст перед строкой
-                else if (comboBox1.SelectedIndex == 26)
-                {
-                    WriteResult(Libs.Text.AddText(textBox1.Text, TextJoin, Libs.Text.SortObject.Strings, Libs.Text.TypeAppend.Forward));
-                }
-                // Добавить текст после строки
-                else if (comboBox1.SelectedIndex == 27)
-                {
-                    WriteResult(Libs.Text.AddText(textBox1.Text, TextJoin, Libs.Text.SortObject.Strings, Libs.Text.TypeAppend.Back));
-                }
-                // Добавить текст перед словом
-                else if (comboBox1.SelectedIndex == 28)
-                {
-                    WriteResult(Libs.Text.AddText(textBox1.Text, TextJoin, Libs.Text.SortObject.Words, Libs.Text.TypeAppend.Forward));
-                }
-                // Добавить текст после слова
-                else if (comboBox1.SelectedIndex == 29)
-                {
-                    WriteResult(Libs.Text.AddText(textBox1.Text, TextJoin, Libs.Text.SortObject.Words, Libs.Text.TypeAppend.Back));
-                }
-                // Добавить текст перед буквой
-                else if (comboBox1.SelectedIndex == 30)
-                {
-                    WriteResult(Libs.Text.AddText(textBox1.Text, TextJoin, Libs.Text.SortObject.Simbols, Libs.Text.TypeAppend.Forward));
-                }
-                // Добавить текст после буквы
-                else if (comboBox1.SelectedIndex == 31)
-                {
-                    WriteResult(Libs.Text.AddText(textBox1.Text, TextJoin, Libs.Text.SortObject.Simbols, Libs.Text.TypeAppend.Back));
-                }
-                // Поиск
-                else if (textBox6.Text.Length > 0 || 
-                    (comboBox5.Text.Length > 0 && comboBox5.Text.Trim() != "Спец. символы" && this.FindSpecSimbolCB5.Length>0) || 
-                    (comboBox6.Text.Length > 0 && comboBox6.Text.Trim() != "Регулярное выражение" && this.patternRegEx != null)
-                )
-                {
-                    string find = "";
-
-                    //выводит найдненное по регулярному выражению
-
-                    if (this.patternRegEx != null)
-                    {
-                        find = "";
-                        MatchCollection matches = Regex.Matches(textBox1.Text, this.patternRegEx);
-                        if (matches != null && matches.Count > 0)
-                        {
-
-                            foreach (var m in matches)
-                            {
-                                if (!String.IsNullOrEmpty(find))
-                                {
-                                    find += Environment.NewLine;
-                                }
-                                find += m.ToString();
-                            }
-                        }
-
-                    }
-                    else
-                    {
-                        //выводит строки содержащие искомое
-                        string textFind = textBox6.Text.Length > 0 ? textBox6.Text : this.FindSpecSimbolCB5;
-                        if (textBox1.Text.IndexOf(textFind, System.StringComparison.OrdinalIgnoreCase) > -1)
-                        {
-                            if (textBox1.Text.IndexOf(Environment.NewLine, System.StringComparison.OrdinalIgnoreCase) > -1)
-                            {
-                                foreach (var row in textBox1.Text.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries))
-                                {
-                                    if (row.IndexOf(textFind, System.StringComparison.OrdinalIgnoreCase) > -1)
-                                    {
-                                        if (!String.IsNullOrEmpty(find))
-                                        {
-                                            find += Environment.NewLine;
-                                        }
-                                        find += row;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    // выводим найденное
-                    WriteResult(find);
-
-                    // Замена
-                    if (textBox5.Text.Length>0 || 
-                        (comboBox4.Text.Length>0 && comboBox4.Text.Trim() != "Спец. символы" && this.ReplaceSpecSimbolCB4.Length > 0)
-                    )
-                    {
-                        string rplc = (textBox5.Text.Length > 0 ? textBox5.Text : this.ReplaceSpecSimbolCB4);
-                        // или выводим замененное
-                        WriteResult(textBox1.Text.Replace(find, rplc));
-                    }
-                }
-            }
-        }
-        
-        #endregion
-
-        #region Helpers
-        public void WriteResult(string d="")
-        {
-            // Изменение пишутся в исходник
-            if (checkBox1.Checked)
-            {
-                textBox1.Text = d;
-            }
-            // Изменения записываются во второе окно
-            else
-            {
-                textBox2.Text = d;
-            }
-        }
-
-
-        #endregion
-
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             /*
@@ -363,7 +202,7 @@ namespace SuperGeroy
             textBox4.Enabled = false;
             comboBox3.Enabled = false;
             comboBox3.SelectedIndex = 0;
-            button1.Enabled = false;
+            button1.Enabled = true;
 
             // Split and Join
             if (comboBox1.SelectedIndex == 1)
@@ -373,7 +212,7 @@ namespace SuperGeroy
                 textBox4.Enabled = true;
                 comboBox3.Enabled = true;
                 comboBox3.SelectedIndex = 1;
-                button1.Enabled = true;
+
             }
             // Transliteration
             else if (comboBox1.SelectedIndex == 2)
@@ -388,7 +227,7 @@ namespace SuperGeroy
             // Capitalized first simbol on word without pretext
             else if (comboBox1.SelectedIndex == 4)
             {
-                WriteResult(Libs.Text.CapitalizedFirstSimbol(textBox1.Text,true));
+                WriteResult(Libs.Text.CapitalizedFirstSimbol(textBox1.Text, true));
             }
             // Все прописью
             else if (comboBox1.SelectedIndex == 6)
@@ -403,7 +242,7 @@ namespace SuperGeroy
             // Убрать лишние пробелы
             else if (comboBox1.SelectedIndex == 9)
             {
-                WriteResult(textBox1.Text.Replace("   "," ").Replace("  "," ").ToString().Trim());
+                WriteResult(textBox1.Text.Replace("   ", " ").Replace("  ", " ").ToString().Trim());
             }
             // Количество символов в начало строки
             else if (comboBox1.SelectedIndex == 10)
@@ -478,6 +317,251 @@ namespace SuperGeroy
                 button1.Enabled = true;
             }
         }
+        private void comboBox7_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                // Выполнить
+                button1.PerformClick();
+            }
+        }
+        #endregion
+
+        #region кнопка Выполнить
+        public delegate void AsyncAction();
+        public delegate void DispatcherInvoker(Form form, AsyncAction a);
+        public class Dispatcher
+        {
+            public static void Invoke(Form form, AsyncAction action)
+            {
+                if (!form.InvokeRequired)
+                {
+                    action();
+                }
+                else
+                {
+                    form.Invoke((DispatcherInvoker)Invoke, form, action);
+                }
+            }
+        }
+        /// <summary>
+        /// Выполнить
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button1_Click(object sender, EventArgs e)
+        {
+            // Текст
+            if (tabControl1.SelectedIndex==0) // Текст
+            {
+                if (textBox1.Text != "")
+                {
+                    // Разбить текст на строки по символу или тексту
+                    // find: textBox3 and comboBox2
+                    // replace: textBox4 and comboBox3
+
+                    string TextJoin = (textBox4.Text.Trim() != "" ? textBox4.Text : this.ReplaceSpecSimbol);
+
+                    if (comboBox1.SelectedIndex == 1)
+                    {
+                        if (textBox3.Text.Length > 0)
+                        {
+                            if (textBox4.Text.Length > 0)
+                            {
+                                WriteResult(String.Join(textBox4.Text, textBox1.Text.Split(new string[] { textBox3.Text }, StringSplitOptions.RemoveEmptyEntries)));
+                            }
+                            else if (comboBox3.Text.Length > 0 && comboBox3.Text != "Спец. символы")
+                            {
+                                WriteResult(String.Join(this.ReplaceSpecSimbol, textBox1.Text.Split(new string[] { textBox3.Text }, StringSplitOptions.RemoveEmptyEntries)));
+                            }
+
+                        }
+                        else if (comboBox2.Text.Length > 0 && comboBox2.Text != "Спец. символы")
+                        {
+                            if (textBox4.Text.Length > 0)
+                            {
+                                WriteResult(String.Join(textBox4.Text, textBox1.Text.Split(new string[] { this.FindSpecSimbol }, StringSplitOptions.RemoveEmptyEntries)));
+                            }
+                            else if (comboBox3.Text.Length > 0 && comboBox3.Text != "Спец. символы")
+                            {
+                                WriteResult(String.Join(this.ReplaceSpecSimbol, textBox1.Text.Split(new string[] { this.FindSpecSimbol }, StringSplitOptions.RemoveEmptyEntries)));
+                            }
+
+                        }
+                    }
+                    // Добавить текст перед строкой
+                    else if (comboBox1.SelectedIndex == 26)
+                    {
+                        WriteResult(Libs.Text.AddText(textBox1.Text, TextJoin, Libs.Text.SortObject.Strings, Libs.Text.TypeAppend.Forward));
+                    }
+                    // Добавить текст после строки
+                    else if (comboBox1.SelectedIndex == 27)
+                    {
+                        WriteResult(Libs.Text.AddText(textBox1.Text, TextJoin, Libs.Text.SortObject.Strings, Libs.Text.TypeAppend.Back));
+                    }
+                    // Добавить текст перед словом
+                    else if (comboBox1.SelectedIndex == 28)
+                    {
+                        WriteResult(Libs.Text.AddText(textBox1.Text, TextJoin, Libs.Text.SortObject.Words, Libs.Text.TypeAppend.Forward));
+                    }
+                    // Добавить текст после слова
+                    else if (comboBox1.SelectedIndex == 29)
+                    {
+                        WriteResult(Libs.Text.AddText(textBox1.Text, TextJoin, Libs.Text.SortObject.Words, Libs.Text.TypeAppend.Back));
+                    }
+                    // Добавить текст перед буквой
+                    else if (comboBox1.SelectedIndex == 30)
+                    {
+                        WriteResult(Libs.Text.AddText(textBox1.Text, TextJoin, Libs.Text.SortObject.Simbols, Libs.Text.TypeAppend.Forward));
+                    }
+                    // Добавить текст после буквы
+                    else if (comboBox1.SelectedIndex == 31)
+                    {
+                        WriteResult(Libs.Text.AddText(textBox1.Text, TextJoin, Libs.Text.SortObject.Simbols, Libs.Text.TypeAppend.Back));
+                    }
+                    // Поиск
+                    else if (textBox6.Text.Length > 0 ||
+                        (comboBox5.Text.Length > 0 && comboBox5.Text.Trim() != "Спец. символы" && this.FindSpecSimbolCB5.Length > 0) ||
+                        (comboBox6.Text.Length > 0 && comboBox6.Text.Trim() != "Регулярное выражение" && this.patternRegEx != null)
+                    )
+                    {
+                        string find = "";
+
+                        //выводит найдненное по регулярному выражению
+
+                        if (this.patternRegEx != null)
+                        {
+                            find = "";
+                            MatchCollection matches = Regex.Matches(textBox1.Text, this.patternRegEx);
+                            if (matches != null && matches.Count > 0)
+                            {
+
+                                foreach (var m in matches)
+                                {
+                                    if (!String.IsNullOrEmpty(find))
+                                    {
+                                        find += Environment.NewLine;
+                                    }
+                                    find += m.ToString();
+                                }
+                            }
+
+                        }
+                        else
+                        {
+                            //выводит строки содержащие искомое
+                            string textFind = textBox6.Text.Length > 0 ? textBox6.Text : this.FindSpecSimbolCB5;
+                            if (textBox1.Text.IndexOf(textFind, System.StringComparison.OrdinalIgnoreCase) > -1)
+                            {
+                                if (textBox1.Text.IndexOf(Environment.NewLine, System.StringComparison.OrdinalIgnoreCase) > -1)
+                                {
+                                    foreach (var row in textBox1.Text.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries))
+                                    {
+                                        if (row.IndexOf(textFind, System.StringComparison.OrdinalIgnoreCase) > -1)
+                                        {
+                                            if (!String.IsNullOrEmpty(find))
+                                            {
+                                                find += Environment.NewLine;
+                                            }
+                                            find += row;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        // выводим найденное
+                        WriteResult(find);
+
+                        // Замена
+                        if (textBox5.Text.Length > 0 ||
+                            (comboBox4.Text.Length > 0 && comboBox4.Text.Trim() != "Спец. символы" && this.ReplaceSpecSimbolCB4.Length > 0)
+                        )
+                        {
+                            string rplc = (textBox5.Text.Length > 0 ? textBox5.Text : this.ReplaceSpecSimbolCB4);
+                            // или выводим замененное
+                            WriteResult(textBox1.Text.Replace(find, rplc));
+                        }
+                    }
+                }
+            }
+            // Файлы
+            else if (tabControl1.SelectedIndex == 1) 
+            {
+                // путь к директории с файлами:
+                if (!string.IsNullOrEmpty(textBox1.Text) && !string.IsNullOrEmpty(comboBox7.Text))
+                {
+                    if (Directory.Exists(textBox1.Text))
+                    {
+                        string newfile = "", msg="";
+                        int i = 0, cntfiles = Directory.GetFiles(textBox1.Text).Length;
+                        toolStripProgressBar1.Maximum = cntfiles;
+                        foreach (var file in Directory.GetFiles(textBox1.Text))
+                        {
+                            // асинхронный вызов, для отображения данных на форме
+                            Dispatcher.Invoke(this, () =>
+                            {
+                                newfile = Libs.Files.ReplaceNameByMask(comboBox7.Text, file, i);
+                                try
+                                {
+                                    File.Move(file, newfile);
+                                    msg = "'" + file + "' => '" + newfile + "'";
+                                }
+                                catch (Exception ex) 
+                                {
+                                    msg = "При переименовании из '" + file + "' в '"+ newfile + "' возникла ошибка: '" + ex.Message + "'";
+                                }
+                                textBox2.Text += msg;
+                                // прокручивание на последнюю строку
+                                textBox2.SelectionStart = textBox2.Text.Length;
+                                textBox2.ScrollToCaret();
+                                // обработанные файлы
+                                toolStripStatusLabel1.Text = (i+1)+ " / "+ cntfiles;
+                                // отображение прогресса
+                                toolStripProgressBar1.Value += 1; 
+
+                            });
+
+                        }
+                    }
+                    else
+                    {
+                        if (MessageBox.Show("Указанной '" + textBox1.Text + "' директории не существует!") == DialogResult.OK)
+                        {
+                            textBox1.Focus();
+                        }
+                    }
+                }
+                else
+                {
+                    if (MessageBox.Show("В левом верхнем текстовом поле должен быть указан каталог!") == DialogResult.OK)
+                    {
+                        textBox1.Focus();
+                    }
+                } 
+            }
+        }
+        
+        #endregion
+
+        #region Helpers
+        public void WriteResult(string d="")
+        {
+            // Изменение пишутся в исходник
+            if (checkBox1.Checked)
+            {
+                textBox1.Text = d;
+            }
+            // Изменения записываются во второе окно
+            else
+            {
+                textBox2.Text = d;
+            }
+        }
+
+
+        #endregion
+
+        
 
         
     }
