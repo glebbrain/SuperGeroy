@@ -162,11 +162,18 @@ namespace SuperGeroy.Libs
         public static string CalcCountSimbols(string d)
         {
             string r = "";
-            if (!string.IsNullOrEmpty(d) && d.IndexOf(Environment.NewLine, System.StringComparison.OrdinalIgnoreCase) > -1)
+            if (!string.IsNullOrEmpty(d))
             {
-                foreach (string s in d.Split(new string[] { Environment.NewLine },StringSplitOptions.RemoveEmptyEntries))
+                if (d.IndexOf(Environment.NewLine, System.StringComparison.OrdinalIgnoreCase) > -1)
                 {
-                    r += "[c пробелами: " + s.Length.ToString() + ", без: " + s.Replace(" ", "").Length.ToString() + "] " + s;
+                    foreach (string s in d.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries))
+                    {
+                        r += "[c пробелами: " + s.Length.ToString() + ", без: " + s.Replace(" ", "").Length.ToString() + "] " + s + Environment.NewLine;
+                    }
+                }
+                else
+                {
+                    r += "[c пробелами: " + d.Length.ToString() + ", без: " + d.Replace(" ", "").Length.ToString() + "] " + d;
                 }
             }
             return r;
@@ -321,7 +328,8 @@ namespace SuperGeroy.Libs
                         {
                             if (row.IndexOf(" ", System.StringComparison.OrdinalIgnoreCase) > -1)
                             {
-                                string[] nw = null;
+                                // количество пробелов в строке +1 , дает количество слов
+                                string[] nw = new string[row.ToCharArray().Where(i => i == ' ').Count()+1];
                                 words = SuperSort(row.Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries), type);
                                 if (words!=null && words.Length>0)
                                 {
@@ -445,7 +453,7 @@ namespace SuperGeroy.Libs
                             if (row.IndexOf(" ", StringComparison.OrdinalIgnoreCase) > -1)
                             {
                                 string[] words = row.Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries);
-                                string[] ts = null;
+                                string[] ts = new string[row.ToCharArray().Where(i => i == ' ').Count()];
                                 foreach (string word in words)
                                 {
                                     ts.Append((f == TypeAppend.Forward) ? a + word : word + a);
@@ -472,7 +480,7 @@ namespace SuperGeroy.Libs
                             if (row.IndexOf(" ", System.StringComparison.OrdinalIgnoreCase) > -1)
                             {
                                 string[] words = row.Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries);
-                                string[] ts = null;
+                                string[] ts = new string[row.ToCharArray().Where(i => i == ' ').Count()]; ;
                                 foreach (string word in words)
                                 {
                                     string nw = "";
@@ -497,11 +505,55 @@ namespace SuperGeroy.Libs
             }
             return r;
         }
-
+        /// <summary>
+        /// Получить символ из алфавита по индексу
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
         public static string AlphabetEN(int index)
         {
             string a = "abcdefghijklmnopqrstuvwxyz";
+            if (index>=a.Length)
+            {
+                index = index - a.Length;
+            }
             return a[index].ToString();
+        }
+        /// <summary>
+        /// Исправление пунктуации
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static string FixPunctuation(string input)
+        {
+            string r = "";
+            // 1. Удаление лишних пробелов
+            r = input.Trim().Replace("   ", " ").Replace("  ", " ");
+            // 1.1. Точки
+            r = r.Replace(" . ", ".");
+            // 1.2. Остальные символы
+            string p = "~`!@#$%^&*_+(){}[]<>|\\/;:,?№-=≪≫–";
+            string n = "";
+            foreach (char s in p)
+            {
+                r = r.Replace(" "+ s.ToString() + " ", s.ToString());
+            }
+            
+            // 2. Установка пробелов в нужных местах
+            r = r.Replace(",", ", ").Replace(".", ". ").Replace(". . .", "... ").Replace(". .", ".. ").Replace("  ", " ");
+            // 2.1. Кавычки
+            r = r.Replace("≪", " ≪").Replace("≫", "≫ ");
+            // 2.2. Двоеточие и точка с запятой
+            r = r.Replace(":", ": ").Replace(";", "; ");
+            // 2.3. Знаки
+            r = r.Replace(" !", "!").Replace("!", "! ").Replace("?", "? ").Replace("! ? ", "!? ");
+            // 2.4. Длинная тирешка
+            r = r.Replace("–", " – ");
+            // 2.5. Скобки
+            r = r.Replace("(", " (").Replace(")", ") ").Replace("{", " {").Replace("}", "} ").Replace("[", " [").Replace("]", "] ").Replace("<", " <").Replace(">", "> ");
+            // 3. Завершающее удаление двойных пробелов
+            r = r.Replace("  ", " ");
+            return r.Trim(' ');
         }
     }
 }

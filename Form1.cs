@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -83,6 +84,9 @@ namespace SuperGeroy
                 case 5:
                     r = "  ";
                     break;
+                case 6:
+                    r = " ";
+                    break;
                 default:
                     r = "";
                     break;
@@ -92,11 +96,13 @@ namespace SuperGeroy
         public string FindSpecSimbol = "";
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
+            textBox3.Text = "";
             this.FindSpecSimbol = SpecSimbolsCB(comboBox2.SelectedIndex);
         }
         public string ReplaceSpecSimbol = "";
         private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
         {
+            textBox4.Text = "";
             this.ReplaceSpecSimbol = SpecSimbolsCB(comboBox3.SelectedIndex);
         }
         public string patternRegEx = "";
@@ -138,6 +144,7 @@ namespace SuperGeroy
         private string FindSpecSimbolCB5 = "";
         private void comboBox5_SelectedIndexChanged(object sender, EventArgs e)
         {
+            textBox6.Text = "";
             button1.Enabled = false;
             this.FindSpecSimbolCB5 = SpecSimbolsCB(comboBox5.SelectedIndex);
             if (!string.IsNullOrEmpty(this.FindSpecSimbolCB5))
@@ -149,6 +156,7 @@ namespace SuperGeroy
         private string ReplaceSpecSimbolCB4 = "";
         private void comboBox4_SelectedIndexChanged(object sender, EventArgs e)
         {
+            textBox5.Text = "";
             button1.Enabled = false;
             this.ReplaceSpecSimbolCB4 = SpecSimbolsCB(comboBox4.SelectedIndex);
             if (!string.IsNullOrEmpty(this.ReplaceSpecSimbolCB4))
@@ -159,42 +167,43 @@ namespace SuperGeroy
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             /*
-            
-             0  Действие
-           + 1  Разбить текст на строки по символу или тексту
-           + 2  Транслит
-           + 3  Все слова с Заглавной буквы
-           + 4  Все слова с Заглавной буквы без предлогов
-             5  ----------------------------------------
-           + 6  Все прописью
-           + 7  Все Заглавной
-             8  ----------------------------------------
-           + 9  Убрать лишние пробелы
-           + 10 Количество символов в начало строки
-           + 11 Перевернуть строку
-             12 ----------------------------------------
-           + 13 Сменить раскладку QWERTY с RU на EN
-           + 14 Сменить раскладку QWERTY с EN на RU
-             15 ----------------------------------------
-           + 16 Сортировка строк от А до Я
-           + 17 Сортировка строк от Я до А
-           + 18 Случайная перестановка строк
-           + 19 Сортировка слов в строке от А до Я
-           + 20 Сортировка слов в строке от Я до А
-           + 21 Случайная перестановка слов
-           + 22 Сортировка букв в слове от А до Я
-           + 23 Сортировка букв в слове от Я до А
-           + 24 Случайная перестановка букв
-             25 ----------------------------------------
-           + 26 Добавить текст перед строкой
-           + 27 Добавить текст после строки
-           + 28 Добавить текст перед словом
-           + 29 Добавить текст после слова
-           + 30 Добавить текст перед буквой
-           + 31 Добавить текст после буквы
-             32 ----------------------------------------
-            
-            
+                0 Действие
+             +  1 Разбить текст на строки по символу или тексту
+             +  2 Транслит
+             +  3 Все слова с Заглавной буквы
+             +  4 Все слова с Заглавной буквы без предлогов
+                5 ----------------------------------------
+             +  6 Все прописью
+             +  7 Все Заглавной
+                8 ----------------------------------------
+             +  9 Убрать лишние пробелы
+             + 10 Количество символов в начало строки
+             + 11 Перевернуть строку
+               12 ----------------------------------------
+             + 13 Сменить раскладку QWERTY с RU на EN
+             + 14 Сменить раскладку QWERTY с EN на RU
+               15 ----------------------------------------
+             + 16 Сортировка строк от А до Я
+             + 17 Сортировка строк от Я до А
+             + 18 Случайная перестановка строк
+             ! 19 Сортировка слов в строке от А до Я
+             ! 20 Сортировка слов в строке от Я до А
+             ! 21 Случайная перестановка слов
+             ! 22 Сортировка букв в слове от А до Я
+             ! 23 Сортировка букв в слове от Я до А
+             ! 24 Случайная перестановка букв
+               25 ----------------------------------------
+             + 26 Добавить текст в начало строки
+             + 27 Добавить текст в конец строки
+               28 ----------------------------------------
+             + 29 Добавить текст перед строкой
+             + 30 Добавить текст после строки
+             ! 31 Добавить текст перед словом
+             ! 32 Добавить текст после слова
+             ! 33 Добавить текст перед буквой
+             ! 34 Добавить текст после буквы
+               35 ----------------------------------------
+             + 36 Исправление пунктуации
             */
 
             textBox3.Enabled = false;
@@ -203,6 +212,7 @@ namespace SuperGeroy
             comboBox3.Enabled = false;
             comboBox3.SelectedIndex = 0;
             button1.Enabled = true;
+            button5.Enabled = true; // repeat action
 
             // Split and Join
             if (comboBox1.SelectedIndex == 1)
@@ -211,8 +221,10 @@ namespace SuperGeroy
                 comboBox2.Enabled = true;
                 textBox4.Enabled = true;
                 comboBox3.Enabled = true;
+                // разбитие по умолчанию - Enter
                 comboBox3.SelectedIndex = 1;
-
+                this.ReplaceSpecSimbol = "\r\n";
+                button5.Enabled = false;
             }
             // Transliteration
             else if (comboBox1.SelectedIndex == 2)
@@ -222,12 +234,12 @@ namespace SuperGeroy
             // Capitalized first simbol on word
             else if (comboBox1.SelectedIndex == 3)
             {
-                WriteResult(Libs.Text.CapitalizedFirstSimbol(textBox1.Text));
+                WriteResult(Libs.Text.CapitalizedFirstSimbol(textBox1.Text.ToLower()));
             }
             // Capitalized first simbol on word without pretext
             else if (comboBox1.SelectedIndex == 4)
             {
-                WriteResult(Libs.Text.CapitalizedFirstSimbol(textBox1.Text, true));
+                WriteResult(Libs.Text.CapitalizedFirstSimbol(textBox1.Text.ToLower(), true));
             }
             // Все прописью
             else if (comboBox1.SelectedIndex == 6)
@@ -237,7 +249,7 @@ namespace SuperGeroy
             // Все Заглавной
             else if (comboBox1.SelectedIndex == 7)
             {
-                WriteResult(textBox1.Text.ToLowerInvariant());
+                WriteResult(textBox1.Text.ToUpperInvariant());
             }
             // Убрать лишние пробелы
             else if (comboBox1.SelectedIndex == 9)
@@ -310,11 +322,29 @@ namespace SuperGeroy
                 WriteResult(Libs.Text.SortStrings(textBox1.Text, Libs.Text.SortObject.Simbols, Libs.Text.SortType.Random));
             }
             // Добавить текст в начало/конец строки,слова,символа
-            else if (comboBox1.SelectedIndex >= 26 && comboBox1.SelectedIndex <= 31)
+            else if (comboBox1.SelectedIndex >= 26 && comboBox1.SelectedIndex <= 34)
             {
                 textBox4.Enabled = true;
                 comboBox3.Enabled = true;
                 button1.Enabled = true;
+                button5.Enabled = false;
+            }
+            // Исправление пунктуации
+            else if (comboBox1.SelectedIndex==36)
+            {
+                // изменения пишутся в исходник
+                if (checkBox1.Checked) 
+                {
+                    WriteResult(Libs.Text.FixPunctuation(textBox1.Text));
+                    Thread.Sleep(100);
+                    WriteResult(Libs.Text.FixPunctuation(textBox1.Text));
+                }
+                else
+                {
+                    WriteResult(Libs.Text.FixPunctuation(textBox1.Text));
+                    Thread.Sleep(100);
+                    WriteResult(Libs.Text.FixPunctuation(textBox2.Text));
+                }
             }
         }
         private void comboBox7_KeyPress(object sender, KeyPressEventArgs e)
@@ -324,6 +354,26 @@ namespace SuperGeroy
                 // Выполнить
                 button1.PerformClick();
             }
+        }
+        private void textBox4_TextChanged(object sender, EventArgs e)
+        {
+            comboBox3.Text = "Спец. символы";
+        }
+
+        private void textBox3_TextClick(object sender, EventArgs e)
+        {
+            comboBox2.Text = "Спец. символы";
+        }
+        private void textBox6_TextClick(object sender, EventArgs e)
+        {
+            button1.Enabled = true;
+            comboBox5.Text = "Спец. символы";
+        }
+
+        private void textBox5_TextChanged(object sender, EventArgs e)
+        {
+            button1.Enabled = true;
+            comboBox4.Text = "Спец. символы";
         }
         #endregion
 
@@ -471,7 +521,10 @@ namespace SuperGeroy
                         }
                         // выводим найденное
                         WriteResult(find);
-
+                        if (string.IsNullOrEmpty(find))
+                        {
+                            find = textBox6.Text;
+                        }
                         // Замена
                         if (textBox5.Text.Length > 0 ||
                             (comboBox4.Text.Length > 0 && comboBox4.Text.Trim() != "Спец. символы" && this.ReplaceSpecSimbolCB4.Length > 0)
@@ -540,7 +593,32 @@ namespace SuperGeroy
                 } 
             }
         }
-        
+        /// <summary>
+        /// Результат из textbox2.Text в textbox1.Text
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button3_Click(object sender, EventArgs e)
+        {
+            textBox1.Text = textBox2.Text;
+            textBox2.Text = "";
+        }
+        private void button4_Click(object sender, EventArgs e)
+        {
+            string s = textBox1.Text;
+            textBox1.Text = textBox2.Text;
+            textBox2.Text = s;
+        }
+        /// <summary>
+        /// Добавление результата к исходному тексту
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button6_Click(object sender, EventArgs e)
+        {
+            textBox1.Text += Environment.NewLine + textBox2.Text;
+            textBox2.Text = "";
+        }
         #endregion
 
         #region Helpers
@@ -559,9 +637,15 @@ namespace SuperGeroy
         }
 
 
-        #endregion
 
-        
+
+
+
+
+
+
+
+        #endregion
 
         
     }

@@ -30,10 +30,15 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.splitter2 = new System.Windows.Forms.Splitter();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -48,6 +53,7 @@
             this.comboBox5 = new System.Windows.Forms.ComboBox();
             this.textBox6 = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button5 = new System.Windows.Forms.Button();
             this.comboBox3 = new System.Windows.Forms.ComboBox();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -73,11 +79,10 @@
             this.сайтToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.авторGlebBrainToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
+            this.button6 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -90,11 +95,13 @@
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
-            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.button6);
+            this.panel1.Controls.Add(this.button4);
+            this.panel1.Controls.Add(this.button3);
             this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.button2);
             this.panel1.Controls.Add(this.checkBox1);
@@ -104,10 +111,30 @@
             this.panel1.Size = new System.Drawing.Size(800, 24);
             this.panel1.TabIndex = 0;
             // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(368, 0);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(32, 23);
+            this.button4.TabIndex = 5;
+            this.button4.Text = "<->";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(402, 0);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(29, 23);
+            this.button3.TabIndex = 4;
+            this.button3.Text = "<<";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
             // button1
             // 
             this.button1.Enabled = false;
-            this.button1.Location = new System.Drawing.Point(363, 1);
+            this.button1.Location = new System.Drawing.Point(644, 1);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 3;
@@ -144,6 +171,27 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(800, 25);
             this.panel2.TabIndex = 1;
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripProgressBar1,
+            this.toolStripStatusLabel1});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 3);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(800, 22);
+            this.statusStrip1.TabIndex = 0;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStripProgressBar1
+            // 
+            this.toolStripProgressBar1.Name = "toolStripProgressBar1";
+            this.toolStripProgressBar1.Size = new System.Drawing.Size(100, 16);
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(0, 17);
             // 
             // splitter1
             // 
@@ -237,7 +285,8 @@
             "Табуляция",
             "8 пробелов",
             "4 пробела",
-            "2 пробела"});
+            "2 пробела",
+            "1 пробел"});
             this.comboBox4.Location = new System.Drawing.Point(136, 70);
             this.comboBox4.Name = "comboBox4";
             this.comboBox4.Size = new System.Drawing.Size(129, 21);
@@ -251,6 +300,7 @@
             this.textBox5.Name = "textBox5";
             this.textBox5.Size = new System.Drawing.Size(124, 20);
             this.textBox5.TabIndex = 9;
+            this.textBox5.TextChanged += new System.EventHandler(this.textBox5_TextChanged);
             // 
             // label3
             // 
@@ -279,7 +329,8 @@
             "Табуляция",
             "8 пробелов",
             "4 пробела",
-            "2 пробела"});
+            "2 пробела",
+            "1 пробел"});
             this.comboBox5.Location = new System.Drawing.Point(136, 31);
             this.comboBox5.Name = "comboBox5";
             this.comboBox5.Size = new System.Drawing.Size(129, 21);
@@ -293,9 +344,11 @@
             this.textBox6.Name = "textBox6";
             this.textBox6.Size = new System.Drawing.Size(124, 20);
             this.textBox6.TabIndex = 5;
+            this.textBox6.Click += new System.EventHandler(this.textBox6_TextClick);
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.button5);
             this.groupBox1.Controls.Add(this.comboBox3);
             this.groupBox1.Controls.Add(this.textBox4);
             this.groupBox1.Controls.Add(this.label2);
@@ -310,6 +363,16 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Форматирование";
             // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(244, 18);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(20, 23);
+            this.button5.TabIndex = 11;
+            this.button5.Text = "R";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
             // comboBox3
             // 
             this.comboBox3.Enabled = false;
@@ -320,7 +383,8 @@
             "Табуляция",
             "8 пробелов",
             "4 пробела",
-            "2 пробела"});
+            "2 пробела",
+            "1 пробел"});
             this.comboBox3.Location = new System.Drawing.Point(136, 97);
             this.comboBox3.Name = "comboBox3";
             this.comboBox3.Size = new System.Drawing.Size(129, 21);
@@ -335,6 +399,7 @@
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(124, 20);
             this.textBox4.TabIndex = 9;
+            this.textBox4.TextChanged += new System.EventHandler(this.textBox4_TextChanged);
             // 
             // label2
             // 
@@ -364,7 +429,8 @@
             "Табуляция",
             "8 пробелов",
             "4 пробела",
-            "2 пробела"});
+            "2 пробела",
+            "1 пробел"});
             this.comboBox2.Location = new System.Drawing.Point(136, 58);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(129, 21);
@@ -379,6 +445,7 @@
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(124, 20);
             this.textBox3.TabIndex = 5;
+            this.textBox3.Click += new System.EventHandler(this.textBox3_TextClick);
             // 
             // comboBox1
             // 
@@ -419,10 +486,11 @@
             "Добавить текст после слова",
             "Добавить текст перед буквой",
             "Добавить текст после буквы",
-            "----------------------------------------"});
+            "----------------------------------------",
+            "Исправление пунктуации"});
             this.comboBox1.Location = new System.Drawing.Point(6, 19);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(259, 21);
+            this.comboBox1.Size = new System.Drawing.Size(232, 21);
             this.comboBox1.TabIndex = 4;
             this.comboBox1.Text = "Действие";
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
@@ -602,27 +670,15 @@
             this.авторGlebBrainToolStripMenuItem.Text = "Автор: GlebBrain";
             this.авторGlebBrainToolStripMenuItem.Click += new System.EventHandler(this.авторGlebBrainToolStripMenuItem_Click);
             // 
-            // statusStrip1
+            // button6
             // 
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripProgressBar1,
-            this.toolStripStatusLabel1});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 3);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(800, 22);
-            this.statusStrip1.TabIndex = 0;
-            this.statusStrip1.Text = "statusStrip1";
-            // 
-            // toolStripStatusLabel1
-            // 
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(118, 17);
-            this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
-            // 
-            // toolStripProgressBar1
-            // 
-            this.toolStripProgressBar1.Name = "toolStripProgressBar1";
-            this.toolStripProgressBar1.Size = new System.Drawing.Size(100, 16);
+            this.button6.Location = new System.Drawing.Point(435, 0);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(35, 23);
+            this.button6.TabIndex = 6;
+            this.button6.Text = "<<+";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // Form1
             // 
@@ -645,6 +701,8 @@
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
@@ -663,8 +721,6 @@
             this.splitContainer1.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            this.statusStrip1.ResumeLayout(false);
-            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -719,6 +775,10 @@
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripProgressBar toolStripProgressBar1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button button6;
     }
 }
 
