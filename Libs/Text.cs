@@ -280,7 +280,7 @@ namespace SuperGeroy.Libs
         public static string SortStrings(string d, SortObject so, SortType type)
         {
             string r = d;
-            if (!string.IsNullOrEmpty(d) && d.IndexOf(Environment.NewLine, System.StringComparison.OrdinalIgnoreCase) >-1)
+            if (!string.IsNullOrEmpty(d) && (d.IndexOf(Environment.NewLine, System.StringComparison.OrdinalIgnoreCase) >-1 || d.IndexOf(' ') > -1))
             {
                 string[] s = null;
                 if (so == SortObject.Strings)
@@ -316,6 +316,7 @@ namespace SuperGeroy.Libs
                             }
                         }
                     }
+                    r = sr;
                 }
                 else if (so == SortObject.Simbols)
                 {
@@ -330,12 +331,14 @@ namespace SuperGeroy.Libs
                             {
                                 // количество пробелов в строке +1 , дает количество слов
                                 string[] nw = new string[row.ToCharArray().Where(i => i == ' ').Count()+1];
-                                words = SuperSort(row.Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries), type);
+                                words = row.Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries); //, SuperSort(type);
                                 if (words!=null && words.Length>0)
                                 {
+                                    int i = 0;
                                     foreach (string ws in words)
                                     {
-                                        nw.Append(SuperSort(ws.ToCharArray(), type).ToString());
+                                        nw[i] = SuperSort(ws.ToCharArray(), type).ToString();
+                                        i++;
                                     }
                                 }
                                 if (!string.IsNullOrEmpty(sr))
@@ -354,6 +357,7 @@ namespace SuperGeroy.Libs
                             }
                         }
                     }
+                    r = sr;
                 }
             }
             return r;
@@ -374,6 +378,7 @@ namespace SuperGeroy.Libs
                         Array.Sort(d);
                         break;
                     case SortType.Reverse:
+                        Array.Sort(d);
                         Array.Reverse(d);
                         break;
                     case SortType.Random:
@@ -392,7 +397,7 @@ namespace SuperGeroy.Libs
         /// <param name="d"></param>
         /// <param name="type"></param>
         /// <returns></returns>
-        public static char[] SuperSort(char[] d, SortType type)
+        public static string SuperSort(char[] d, SortType type)
         {
             if (d != null && d.Length > 0)
             {
@@ -412,7 +417,7 @@ namespace SuperGeroy.Libs
                         break;
                 }
             }
-            return d;
+            return new string(d);
         }
 
         public enum TypeAppend
@@ -453,10 +458,12 @@ namespace SuperGeroy.Libs
                             if (row.IndexOf(" ", StringComparison.OrdinalIgnoreCase) > -1)
                             {
                                 string[] words = row.Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries);
-                                string[] ts = new string[row.ToCharArray().Where(i => i == ' ').Count()];
+                                string[] ts = new string[words.Length];
+                                int i = 0;
                                 foreach (string word in words)
                                 {
-                                    ts.Append((f == TypeAppend.Forward) ? a + word : word + a);
+                                    ts[i] = ((f == TypeAppend.Forward) ? a + word : word + a);
+                                    i++;
                                 }
                                 r += String.Join(" ", ts);
                             } 
@@ -480,7 +487,8 @@ namespace SuperGeroy.Libs
                             if (row.IndexOf(" ", System.StringComparison.OrdinalIgnoreCase) > -1)
                             {
                                 string[] words = row.Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries);
-                                string[] ts = new string[row.ToCharArray().Where(i => i == ' ').Count()]; ;
+                                string[] ts = new string[words.Length];
+                                int i = 0;
                                 foreach (string word in words)
                                 {
                                     string nw = "";
@@ -489,7 +497,8 @@ namespace SuperGeroy.Libs
                                     {
                                         nw += (f == TypeAppend.Forward) ? a + h : h + a;
                                     }
-                                    ts.Append(nw);
+                                    ts[i] = nw;
+                                    i++;
                                 }
                                 r += String.Join(" ", ts);
                             }
@@ -554,6 +563,50 @@ namespace SuperGeroy.Libs
             // 3. Завершающее удаление двойных пробелов
             r = r.Replace("  ", " ");
             return r.Trim(' ');
+        }
+
+        public static string[] FindDublicate(string[] input)
+        {
+            string[] d = new string[input.Length];
+            string[] u = new string[input.Length];
+            int i = 0,j=0;
+            foreach (string s in input)
+            {
+                // u - уникальные строки
+                if (!u.Contains(s))
+                {
+                    u[i++] = s;
+                }
+                // d - дубли
+                else
+                {
+                    d[j++] = s;
+                }
+            }
+            return d;
+        }
+
+        public static string[] FindDublicateAndReplace(string[] input, string replace)
+        {
+            string[] r = new string[input.Length];
+            string[] u = new string[input.Length];
+            int i = 0;
+            foreach (string s in input)
+            {
+                // u - уникальные строки
+                if (!u.Contains(s))
+                {
+                    u[i] = s;
+                    r[i] = s;
+                }
+                // d - дубли
+                else
+                {
+                    r[i] = s.Replace(s, replace);
+                }
+                i++;
+            }
+            return r;
         }
     }
 }

@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.button6 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
@@ -79,7 +80,11 @@
             this.сайтToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.авторGlebBrainToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.button6 = new System.Windows.Forms.Button();
+            this.настройкиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ночнойСтильToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
+            this.стандартныйРежимToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.SuperTestEnabled = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -110,6 +115,16 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(800, 24);
             this.panel1.TabIndex = 0;
+            // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(435, 0);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(35, 23);
+            this.button6.TabIndex = 6;
+            this.button6.Text = "<<+";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // button4
             // 
@@ -268,7 +283,8 @@
             "Регулярное выражение",
             "email: email@email.com",
             "Phone: +7(916)777-88-00",
-            "URL: https://glebrain.ru"});
+            "URL: https://glebrain.ru",
+            "IP: 8.255.8.10"});
             this.comboBox6.Location = new System.Drawing.Point(271, 31);
             this.comboBox6.Name = "comboBox6";
             this.comboBox6.Size = new System.Drawing.Size(145, 21);
@@ -286,7 +302,8 @@
             "8 пробелов",
             "4 пробела",
             "2 пробела",
-            "1 пробел"});
+            "1 пробел",
+            "Пустота"});
             this.comboBox4.Location = new System.Drawing.Point(136, 70);
             this.comboBox4.Name = "comboBox4";
             this.comboBox4.Size = new System.Drawing.Size(129, 21);
@@ -330,7 +347,10 @@
             "8 пробелов",
             "4 пробела",
             "2 пробела",
-            "1 пробел"});
+            "1 пробел",
+            "Все символы",
+            "Дубликаты строк",
+            "Дубликаты слов"});
             this.comboBox5.Location = new System.Drawing.Point(136, 31);
             this.comboBox5.Name = "comboBox5";
             this.comboBox5.Size = new System.Drawing.Size(129, 21);
@@ -477,9 +497,6 @@
             "Сортировка букв в слове от Я до А",
             "Случайная перестановка букв",
             "----------------------------------------",
-            "Добавить текст в начало строки",
-            "Добавить текст в конец строки",
-            "----------------------------------------",
             "Добавить текст перед строкой",
             "Добавить текст после строки",
             "Добавить текст перед словом",
@@ -582,6 +599,7 @@
             // 
             // textBox1
             // 
+            this.textBox1.BackColor = System.Drawing.SystemColors.Window;
             this.textBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textBox1.Location = new System.Drawing.Point(0, 0);
             this.textBox1.Multiline = true;
@@ -604,7 +622,8 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.полезностиToolStripMenuItem,
-            this.оПрограммеToolStripMenuItem});
+            this.оПрограммеToolStripMenuItem,
+            this.настройкиToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(800, 24);
@@ -670,15 +689,47 @@
             this.авторGlebBrainToolStripMenuItem.Text = "Автор: GlebBrain";
             this.авторGlebBrainToolStripMenuItem.Click += new System.EventHandler(this.авторGlebBrainToolStripMenuItem_Click);
             // 
-            // button6
+            // настройкиToolStripMenuItem
             // 
-            this.button6.Location = new System.Drawing.Point(435, 0);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(35, 23);
-            this.button6.TabIndex = 6;
-            this.button6.Text = "<<+";
-            this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
+            this.настройкиToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ночнойСтильToolStripMenuItem,
+            this.toolStripMenuItem2,
+            this.стандартныйРежимToolStripMenuItem,
+            this.SuperTestEnabled});
+            this.настройкиToolStripMenuItem.Name = "настройкиToolStripMenuItem";
+            this.настройкиToolStripMenuItem.Size = new System.Drawing.Size(79, 20);
+            this.настройкиToolStripMenuItem.Text = "Настройки";
+            // 
+            // ночнойСтильToolStripMenuItem
+            // 
+            this.ночнойСтильToolStripMenuItem.CheckOnClick = true;
+            this.ночнойСтильToolStripMenuItem.Name = "ночнойСтильToolStripMenuItem";
+            this.ночнойСтильToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
+            this.ночнойСтильToolStripMenuItem.Text = "Ночной стиль";
+            this.ночнойСтильToolStripMenuItem.Click += new System.EventHandler(this.ночнойСтильToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(185, 6);
+            // 
+            // стандартныйРежимToolStripMenuItem
+            // 
+            this.стандартныйРежимToolStripMenuItem.Checked = true;
+            this.стандартныйРежимToolStripMenuItem.CheckOnClick = true;
+            this.стандартныйРежимToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.стандартныйРежимToolStripMenuItem.Name = "стандартныйРежимToolStripMenuItem";
+            this.стандартныйРежимToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
+            this.стандартныйРежимToolStripMenuItem.Text = "Стандартный режим";
+            this.стандартныйРежимToolStripMenuItem.Click += new System.EventHandler(this.стандартныйРежимToolStripMenuItem_Click);
+            // 
+            // SuperTestEnabled
+            // 
+            this.SuperTestEnabled.CheckOnClick = true;
+            this.SuperTestEnabled.Name = "SuperTestEnabled";
+            this.SuperTestEnabled.Size = new System.Drawing.Size(188, 22);
+            this.SuperTestEnabled.Text = "Тестовый режим";
+            this.SuperTestEnabled.Click += new System.EventHandler(this.SuperTestEnabled_Click);
             // 
             // Form1
             // 
@@ -779,6 +830,11 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.ToolStripMenuItem настройкиToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ночнойСтильToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem стандартныйРежимToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem SuperTestEnabled;
     }
 }
 

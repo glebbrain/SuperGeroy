@@ -33,7 +33,49 @@ namespace SuperGeroy
         }
 
         #region Интерфейс Form1
+        private void ночнойСтильToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (ночнойСтильToolStripMenuItem.Checked)
+            {
+                // фон
+                this.BackColor = Color.FromArgb(36, 36, 36);
+                textBox1.BackColor = Color.FromArgb(36, 36, 36);
+                textBox2.BackColor = Color.FromArgb(36, 36, 36);
+                tabPage1.BackColor = Color.FromArgb(36, 36, 36);
+                tabPage2.BackColor = Color.FromArgb(36, 36, 36);
 
+                // текст
+                this.ForeColor = Color.FromArgb(78, 164, 65);
+                textBox1.ForeColor = Color.FromArgb(78, 164, 65);
+            } 
+            else
+            {
+                // фон
+                this.BackColor = Color.FromKnownColor(KnownColor.Control);
+                textBox1.BackColor = Color.FromKnownColor(KnownColor.Window);
+                textBox2.BackColor = Color.FromKnownColor(KnownColor.Window);
+                tabPage1.BackColor = Color.FromKnownColor(KnownColor.Transparent);
+                tabPage2.BackColor = Color.FromKnownColor(KnownColor.Transparent);
+
+                // текст
+                this.ForeColor = Color.FromKnownColor(KnownColor.WindowText);
+                textBox1.ForeColor = Color.FromKnownColor(KnownColor.WindowText);
+            }
+
+        }
+        private void стандартныйРежимToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            стандартныйРежимToolStripMenuItem.Checked = true;
+            SuperTestEnabled.Checked = false;
+            this.Text = "SuperGeroy";
+        }
+
+        private void SuperTestEnabled_Click(object sender, EventArgs e)
+        {
+            стандартныйРежимToolStripMenuItem.Checked = false;
+            SuperTestEnabled.Checked = true;
+            this.Text = "SuperGeroy [Тестовый режим]";
+        }
         private void superGeroyНаGiteToolStripMenuItem_Click(object sender, EventArgs e)
         {
             System.Diagnostics.Process.Start("https://github.com/glebbrain/SuperGeroy");
@@ -64,48 +106,70 @@ namespace SuperGeroy
             textBox2.Text = "";
             comboBox1.SelectedIndex = 0;
         }
-        public string SpecSimbolsCB(int index)
+        private static string SpecSimbolsCB(string text)
         {
             string r = "";
-            switch (index)
+            if (text == "Новая строка (Enter)")
             {
-                case 1:
-                    r = Environment.NewLine;
-                    break;
-                case 2:
-                    r = "\t";
-                    break;
-                case 3:
-                    r = "        ";
-                    break;
-                case 4:
-                    r = "    ";
-                    break;
-                case 5:
-                    r = "  ";
-                    break;
-                case 6:
-                    r = " ";
-                    break;
-                default:
-                    r = "";
-                    break;
+                r = Environment.NewLine;
+            }
+            else if (text== "Табуляция")
+            {
+                r = "\t";
+            }
+            else if (text== "8 пробелов")
+            {
+                r = "        ";
+            }
+            else if (text== "4 пробела")
+            {
+                r = "    ";
+            }
+            else if (text== "2 пробела")
+            {
+                r = "  ";
+            }
+            else if (text== "1 пробел")
+            {
+                r = " ";
+            }
+            else if (text == "Все символы")
+            {
+                r = "~`!@#$%^&*(){}<>_-+=?.№;:|\"},/'";
+            }
+            else if (text == "Спец. символы")
+            {
+                r = "";
+            }
+            else if (text== "Пустота")
+            {
+                r = "";
+            }
+            else if (text== "Дубликаты строк")
+            {
+                r = "{dublicat_strings}";
+            }
+            else if (text == "Дубликаты слов")
+            {
+                r = "{dublicat_words}";
             }
             return r;
         }
-        public string FindSpecSimbol = "";
+        private string FindSpecSimbol = "";
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
             textBox3.Text = "";
-            this.FindSpecSimbol = SpecSimbolsCB(comboBox2.SelectedIndex);
+            this.FindSpecSimbol = SpecSimbolsCB(comboBox2.Text);
+            comboBox2.SelectionLength = 0;
         }
-        public string ReplaceSpecSimbol = "";
+        private string ReplaceSpecSimbol = "";
         private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
         {
             textBox4.Text = "";
-            this.ReplaceSpecSimbol = SpecSimbolsCB(comboBox3.SelectedIndex);
+            this.ReplaceSpecSimbol = SpecSimbolsCB(comboBox3.Text);
+            comboBox3.SelectionLength = 0;
         }
-        public string patternRegEx = "";
+        private string patternRegEx = "";
         private void comboBox6_SelectedIndexChanged(object sender, EventArgs e)
         {
             // TODO: если не указана Замена, сразу выводить поиск по регулярке
@@ -118,20 +182,81 @@ namespace SuperGeroy
             switch (comboBox6.SelectedIndex)
             {
                 case 1:
-                    // email
-                    this.patternRegEx = @"[A-Za-z]+[\.A-Za-z0-9_-]*[A-Za-z0-9]+@[A-Za-z]+\.[A-Za-z]+";
+                    this.patternRegEx = "email";
+                    // Включен тестовый режим
+                    if (SuperTestEnabled.Checked)
+                    {
+                        textBox1.Text =
+                            "test@testgu.ru"
+                            + Environment.NewLine + "te.st@testgu.ru"
+                            + Environment.NewLine + "t.es-t@testgu.ru"
+                            + Environment.NewLine + "test@tes-tgu.ru"
+                            + Environment.NewLine + "test@dev.tes-tgu.ru"
+                            + Environment.NewLine + "ta_sd-es.t@dev.tes-tgu.ru"
+                            + Environment.NewLine + "----------------------------"
+                            + Environment.NewLine + "tasd-est@a.rutasd-est@a.ru"
+                            + Environment.NewLine + "сусликихомячутся@a.rutasd-est@a.ru"
+                        ;
+                    }
                     break;
                 case 2:
-                    // telephone number USA
-                    this.patternRegEx = @"\+(9[976]\d|8[987530]\d|6[987]\d|5[90]\d|42\d|3[875]\d|2[98654321]\d|9[8543210]|8[6421]|6[6543210]|5[87654321]|4[987654310]|3[9643210]|2[70]|7|1)\d{1,14}$";
-                    // phone Russia
-                    //this.patternRegEx = @"^((\+7|7|8)+([0-9]){10})$";
-                    //TODO а здесь надо сделать перебор во всем возможным номерам: http://phoneregex.com/#%5E((%5C%2B7%7C7%7C8)%2B(%5B0-9%5D)%7B10%7D)%24
+                    this.patternRegEx = "telephone";
+                    // Включен тестовый режим
+                    if (SuperTestEnabled.Checked)
+                    {
+                        textBox1.Text =
+                            "многотекста: +7 123 123 12 12 текст в тексте!"
+                            + Environment.NewLine + "+7 (123) 123 12 12"
+                            + Environment.NewLine + "+7(123) 123-12-12"
+                            + Environment.NewLine + "Тест+7 987 654-32-10"
+                            + Environment.NewLine + "8 123 123-12-12"
+                            + Environment.NewLine + "Тест+7(123) 123 00-00Тест"
+                            + Environment.NewLine + "Тест+7(123) 321 0000Тест"
+                            + Environment.NewLine + "+7(123) 1231212"
+                            + Environment.NewLine + "+7 1231231212"
+                            + Environment.NewLine + "+71231231212"
+                            + Environment.NewLine + "1231231212"
+                            + Environment.NewLine + "81231231212"
+                            + Environment.NewLine + "+11231231212"
+                            + Environment.NewLine + "+11231231212"
+                            + Environment.NewLine + "----------------------------"
+                            + Environment.NewLine + "Тетест10100186ТеСт79782434112Тестовый"
+                            + Environment.NewLine + "12-12-25"
+                        ;
+                    }
                     break;
                 case 3:
-                    // (http|http(s)?://)?([\w-]+\.)+[\w-]+[.com|.in|.org]+(\[\?%&=]*)?
-                    // ^(http|https)://.*$
-                    this.patternRegEx = @"^(http|https)://.*$";
+                    this.patternRegEx = "url";
+                    // Включен тестовый режим
+                    if (SuperTestEnabled.Checked)
+                    {
+                        textBox1.Text =
+                            "ftp://test.ru"
+                            + Environment.NewLine + "http://test.ru"
+                            + Environment.NewLine + "https://test.ru"
+                            + Environment.NewLine + "https://test.ru?a=b"
+                            + Environment.NewLine + "https://test.ru&a=b"
+                            + Environment.NewLine + "https://test.ru/catalog/product/test"
+                            + Environment.NewLine + "https://test.ru/catalog/product/test?price=10&count=1"
+                            + Environment.NewLine + "----------------------------"
+                            + Environment.NewLine + "ws://test.ru/catalog/product/test?price=10&count=1"
+                        ;
+                    }
+                    break;
+                case 4:
+                    this.patternRegEx = "ip";
+                    // Включен тестовый режим
+                    if (SuperTestEnabled.Checked)
+                    {
+                        textBox1.Text =
+                            "0.0.0.0"
+                            + Environment.NewLine + "127.0.0.1"
+                            + Environment.NewLine + "8.8.8.8"
+                            + Environment.NewLine + "255.255.255.255"
+                            + Environment.NewLine + "----------------------------"
+                            + Environment.NewLine + "798.10.0.12"
+                        ;
+                    }
                     break;
                 default:
                     break;
@@ -139,71 +264,72 @@ namespace SuperGeroy
             if (!string.IsNullOrEmpty(this.patternRegEx))
             {
                 button1.Enabled = true;
-            }            
+            }
+
+            comboBox6.SelectionLength = 0;
         }
         private string FindSpecSimbolCB5 = "";
         private void comboBox5_SelectedIndexChanged(object sender, EventArgs e)
         {
             textBox6.Text = "";
             button1.Enabled = false;
-            this.FindSpecSimbolCB5 = SpecSimbolsCB(comboBox5.SelectedIndex);
+            this.FindSpecSimbolCB5 = SpecSimbolsCB(comboBox5.Text);
             if (!string.IsNullOrEmpty(this.FindSpecSimbolCB5))
             {
                 button1.Enabled = true;
             }
-            
+            comboBox6.Text = "Регулярное выражение";
+            comboBox5.SelectionLength = 0;
         }
         private string ReplaceSpecSimbolCB4 = "";
         private void comboBox4_SelectedIndexChanged(object sender, EventArgs e)
         {
             textBox5.Text = "";
             button1.Enabled = false;
-            this.ReplaceSpecSimbolCB4 = SpecSimbolsCB(comboBox4.SelectedIndex);
-            if (!string.IsNullOrEmpty(this.ReplaceSpecSimbolCB4))
+            this.ReplaceSpecSimbolCB4 = SpecSimbolsCB(comboBox4.Text);
+            if (comboBox4.Text!= "Спец. символы")
             {
                 button1.Enabled = true;
             }
+            comboBox4.SelectionLength = 0;
         }
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             /*
-                0 Действие
-             +  1 Разбить текст на строки по символу или тексту
-             +  2 Транслит
-             +  3 Все слова с Заглавной буквы
-             +  4 Все слова с Заглавной буквы без предлогов
-                5 ----------------------------------------
-             +  6 Все прописью
-             +  7 Все Заглавной
-                8 ----------------------------------------
-             +  9 Убрать лишние пробелы
-             + 10 Количество символов в начало строки
-             + 11 Перевернуть строку
-               12 ----------------------------------------
-             + 13 Сменить раскладку QWERTY с RU на EN
-             + 14 Сменить раскладку QWERTY с EN на RU
-               15 ----------------------------------------
-             + 16 Сортировка строк от А до Я
-             + 17 Сортировка строк от Я до А
-             + 18 Случайная перестановка строк
-             ! 19 Сортировка слов в строке от А до Я
-             ! 20 Сортировка слов в строке от Я до А
-             ! 21 Случайная перестановка слов
-             ! 22 Сортировка букв в слове от А до Я
-             ! 23 Сортировка букв в слове от Я до А
-             ! 24 Случайная перестановка букв
-               25 ----------------------------------------
-             + 26 Добавить текст в начало строки
-             + 27 Добавить текст в конец строки
-               28 ----------------------------------------
-             + 29 Добавить текст перед строкой
-             + 30 Добавить текст после строки
-             ! 31 Добавить текст перед словом
-             ! 32 Добавить текст после слова
-             ! 33 Добавить текст перед буквой
-             ! 34 Добавить текст после буквы
-               35 ----------------------------------------
-             + 36 Исправление пунктуации
+                  0.  Действие
+                + 1.  Разбить текст на строки по символу или тексту
+                + 2.  Транслит
+                + 3.  Все слова с Заглавной буквы
+                + 4.  Все слова с Заглавной буквы без предлогов
+                  5.  ----------------------------------------
+                + 6.  Все прописью
+                + 7.  Все Заглавной
+                  8.  ----------------------------------------
+                + 9.  Убрать лишние пробелы
+                + 10. Количество символов в начало строки
+                + 11. Перевернуть строку
+                  12. ----------------------------------------
+                + 13. Сменить раскладку QWERTY с RU на EN
+                + 14. Сменить раскладку QWERTY с EN на RU
+                  15. ----------------------------------------
+                + 16. Сортировка строк от А до Я
+                + 17. Сортировка строк от Я до А
+                + 18. Случайная перестановка строк
+                + 19. Сортировка слов в строке от А до Я
+                + 20. Сортировка слов в строке от Я до А
+                + 21. Случайная перестановка слов
+                + 22. Сортировка букв в слове от А до Я
+                + 23. Сортировка букв в слове от Я до А
+                + 24. Случайная перестановка букв
+                  25. ----------------------------------------
+                + 26. Добавить текст перед строкой
+                + 27. Добавить текст после строки
+                + 28. Добавить текст перед словом
+                + 29. Добавить текст после слова
+                + 30. Добавить текст перед буквой
+                + 31. Добавить текст после буквы
+                  32. ----------------------------------------
+                + 33. Исправление пунктуации
             */
 
             textBox3.Enabled = false;
@@ -322,7 +448,8 @@ namespace SuperGeroy
                 WriteResult(Libs.Text.SortStrings(textBox1.Text, Libs.Text.SortObject.Simbols, Libs.Text.SortType.Random));
             }
             // Добавить текст в начало/конец строки,слова,символа
-            else if (comboBox1.SelectedIndex >= 26 && comboBox1.SelectedIndex <= 34)
+            //
+            else if (comboBox1.SelectedIndex >= 26 && comboBox1.SelectedIndex <= 31)
             {
                 textBox4.Enabled = true;
                 comboBox3.Enabled = true;
@@ -330,7 +457,7 @@ namespace SuperGeroy
                 button5.Enabled = false;
             }
             // Исправление пунктуации
-            else if (comboBox1.SelectedIndex==36)
+            else if (comboBox1.SelectedIndex==33)
             {
                 // изменения пишутся в исходник
                 if (checkBox1.Checked) 
@@ -346,6 +473,7 @@ namespace SuperGeroy
                     WriteResult(Libs.Text.FixPunctuation(textBox2.Text));
                 }
             }
+            comboBox1.SelectionLength = 0;
         }
         private void comboBox7_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -422,6 +550,7 @@ namespace SuperGeroy
                             }
                             else if (comboBox3.Text.Length > 0 && comboBox3.Text != "Спец. символы")
                             {
+
                                 WriteResult(String.Join(this.ReplaceSpecSimbol, textBox1.Text.Split(new string[] { textBox3.Text }, StringSplitOptions.RemoveEmptyEntries)));
                             }
 
@@ -439,6 +568,16 @@ namespace SuperGeroy
 
                         }
                     }
+                    /*
+                          25. ----------------------------------------
+                        + 26. Добавить текст перед строкой
+                        + 27. Добавить текст после строки
+                        + 28. Добавить текст перед словом
+                        + 29. Добавить текст после слова
+                        + 30. Добавить текст перед буквой
+                        + 31. Добавить текст после буквы
+                          32. ----------------------------------------
+                    */
                     // Добавить текст перед строкой
                     else if (comboBox1.SelectedIndex == 26)
                     {
@@ -477,62 +616,106 @@ namespace SuperGeroy
                     {
                         string find = "";
 
-                        //выводит найдненное по регулярному выражению
-
-                        if (this.patternRegEx != null)
+                        // Замена
+                        if (textBox5.Text.Length > 0 ||
+                            (comboBox4.Text.Length > 0 && comboBox4.Text.Trim() != "Спец. символы")
+                        )
                         {
-                            find = "";
-                            MatchCollection matches = Regex.Matches(textBox1.Text, this.patternRegEx);
-                            if (matches != null && matches.Count > 0)
+                            string textFind = textBox6.Text.Length > 0 ? textBox6.Text : this.FindSpecSimbolCB5;
+                            string textRepl = textBox5.Text.Length > 0 ? textBox5.Text : this.ReplaceSpecSimbolCB4;
+                            // Дубликаты строк
+                            if (this.FindSpecSimbolCB5 == "{dublicat_strings}")
                             {
-
-                                foreach (var m in matches)
+                                if (this.ReplaceSpecSimbolCB4 == "")
                                 {
-                                    if (!String.IsNullOrEmpty(find))
-                                    {
-                                        find += Environment.NewLine;
-                                    }
-                                    find += m.ToString();
+                                    // удаляем дубликаты через Distinct
+                                    WriteResult(String.Join(Environment.NewLine, textBox1.Text.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries).Where(s => s != "").Distinct().ToArray()));
+                                } 
+                                else
+                                {
+                                    // ищем дубликаты и не изменяя структуры массива помечаим дубли, а затем заменяем их
+                                    WriteResult(String.Join(Environment.NewLine, Libs.Text.FindDublicateAndReplace(textBox1.Text.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries), this.ReplaceSpecSimbolCB4)));
+                                }
+                                
+                            }
+                            // Дубликаты слов
+                            else if (this.FindSpecSimbolCB5 == "{dublicat_words}" && this.ReplaceSpecSimbolCB4 == "")
+                            {
+                                if (this.ReplaceSpecSimbolCB4 == "")
+                                {
+                                    // бьём по пробелам, потом через Distinct удаляем дубли и обратно соединяем по пробелам
+                                    WriteResult(String.Join(" ", textBox1.Text.Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries).Where(s => s != "").Distinct().ToArray()));
+                                }
+                                else
+                                {
+                                    // ищем дубликаты и не изменяя структуры массива помечаим дубли, а затем заменяем их
+                                    WriteResult(String.Join( " ", Libs.Text.FindDublicateAndReplace(textBox1.Text.Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries), this.ReplaceSpecSimbolCB4)));
                                 }
                             }
-
-                        }
-                        else
-                        {
-                            //выводит строки содержащие искомое
-                            string textFind = textBox6.Text.Length > 0 ? textBox6.Text : this.FindSpecSimbolCB5;
-                            if (textBox1.Text.IndexOf(textFind, System.StringComparison.OrdinalIgnoreCase) > -1)
+                            // поиск всех: ~`!@#$%^&*(){}<>_-+=?.№;:|"},/'
+                            else if (comboBox5.Text == "Все символы")
                             {
-                                if (textBox1.Text.IndexOf(Environment.NewLine, System.StringComparison.OrdinalIgnoreCase) > -1)
+                                //TODO: Перенести в Libs.Text
+                                string res = textBox1.Text;
+                                foreach (char s in this.FindSpecSimbolCB5.ToArray())
                                 {
-                                    foreach (var row in textBox1.Text.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries))
+                                    res = res.Replace(s.ToString(), textRepl);
+                                }
+                                WriteResult(res);
+                            }
+                            // Поиск и замена по регулярным выражениям
+                            else if (this.patternRegEx != null)
+                            {
+                                WriteResult(Libs.RegExpression.ReplaceStandartPattern(textBox1.Text, this.patternRegEx, this.ReplaceSpecSimbolCB4, SuperTestEnabled.Checked));
+                            }
+                            else
+                            {
+                                WriteResult(textBox1.Text.Replace(textFind, textRepl));
+                            }
+                        } 
+                        /// Поиск
+                        else 
+                        {
+                            if (this.FindSpecSimbolCB5 == "{dublicat_strings}" && this.ReplaceSpecSimbolCB4 == "")
+                            {
+                                // выводим дубликаты
+                                WriteResult(String.Join(Environment.NewLine, Libs.Text.FindDublicate(find.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries))));
+                            }
+                            // Дубликаты слов
+                            else if (this.FindSpecSimbolCB5 == "{dublicat_words}" && this.ReplaceSpecSimbolCB4 == "")
+                            {
+                                // выводим дубликаты
+                                WriteResult(String.Join(" ", Libs.Text.FindDublicate(find.Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries))));
+                            }
+                            // Поиск по регулярным выражениям
+                            else if (this.patternRegEx != null)
+                            {
+                                WriteResult(Libs.RegExpression.FindStandartPattern(textBox1.Text,this.patternRegEx,SuperTestEnabled.Checked));
+                            }
+                            else
+                            {
+                                //TODO: Перенести в Libs.Text
+                                //выводит строки содержащие искомое
+                                string textFind = textBox6.Text.Length > 0 ? textBox6.Text : this.FindSpecSimbolCB5;
+                                if (textBox1.Text.IndexOf(textFind, System.StringComparison.OrdinalIgnoreCase) > -1)
+                                {
+                                    if (textBox1.Text.IndexOf(Environment.NewLine, System.StringComparison.OrdinalIgnoreCase) > -1)
                                     {
-                                        if (row.IndexOf(textFind, System.StringComparison.OrdinalIgnoreCase) > -1)
+                                        foreach (var row in textBox1.Text.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries))
                                         {
-                                            if (!String.IsNullOrEmpty(find))
+                                            if (row.IndexOf(textFind, System.StringComparison.OrdinalIgnoreCase) > -1)
                                             {
-                                                find += Environment.NewLine;
+                                                if (!String.IsNullOrEmpty(find))
+                                                {
+                                                    find += Environment.NewLine;
+                                                }
+                                                find += row;
                                             }
-                                            find += row;
                                         }
                                     }
                                 }
+                                WriteResult(find);
                             }
-                        }
-                        // выводим найденное
-                        WriteResult(find);
-                        if (string.IsNullOrEmpty(find))
-                        {
-                            find = textBox6.Text;
-                        }
-                        // Замена
-                        if (textBox5.Text.Length > 0 ||
-                            (comboBox4.Text.Length > 0 && comboBox4.Text.Trim() != "Спец. символы" && this.ReplaceSpecSimbolCB4.Length > 0)
-                        )
-                        {
-                            string rplc = (textBox5.Text.Length > 0 ? textBox5.Text : this.ReplaceSpecSimbolCB4);
-                            // или выводим замененное
-                            WriteResult(textBox1.Text.Replace(find, rplc));
                         }
                     }
                 }
@@ -635,6 +818,9 @@ namespace SuperGeroy
                 textBox2.Text = d;
             }
         }
+
+
+
 
 
 
