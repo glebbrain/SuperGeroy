@@ -75,16 +75,17 @@
             this.полезностиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.настройкаGitВVisualStudioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.генераторПаролейToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.оПрограммеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.superGeroyНаGiteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.сайтToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
-            this.авторGlebBrainToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.настройкиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ночнойСтильToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.стандартныйРежимToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.SuperTestEnabled = new System.Windows.Forms.ToolStripMenuItem();
+            this.оПрограммеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.superGeroyНаGiteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.сайтToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+            this.авторGlebBrainToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.справочникКодаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -317,6 +318,7 @@
             this.textBox5.Name = "textBox5";
             this.textBox5.Size = new System.Drawing.Size(124, 20);
             this.textBox5.TabIndex = 9;
+            this.textBox5.Click += new System.EventHandler(this.textBox5_Click);
             this.textBox5.TextChanged += new System.EventHandler(this.textBox5_TextChanged);
             // 
             // label3
@@ -350,7 +352,8 @@
             "1 пробел",
             "Все символы",
             "Дубликаты строк",
-            "Дубликаты слов"});
+            "Дубликаты слов",
+            "Дубликаты символов"});
             this.comboBox5.Location = new System.Drawing.Point(136, 31);
             this.comboBox5.Name = "comboBox5";
             this.comboBox5.Size = new System.Drawing.Size(129, 21);
@@ -622,8 +625,8 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.полезностиToolStripMenuItem,
-            this.оПрограммеToolStripMenuItem,
-            this.настройкиToolStripMenuItem});
+            this.настройкиToolStripMenuItem,
+            this.оПрограммеToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(800, 24);
@@ -634,7 +637,8 @@
             // 
             this.полезностиToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.настройкаGitВVisualStudioToolStripMenuItem,
-            this.генераторПаролейToolStripMenuItem});
+            this.генераторПаролейToolStripMenuItem,
+            this.справочникКодаToolStripMenuItem});
             this.полезностиToolStripMenuItem.Name = "полезностиToolStripMenuItem";
             this.полезностиToolStripMenuItem.Size = new System.Drawing.Size(119, 20);
             this.полезностиToolStripMenuItem.Text = "Полезные ссылки";
@@ -652,42 +656,6 @@
             this.генераторПаролейToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
             this.генераторПаролейToolStripMenuItem.Text = "Генератор паролей";
             this.генераторПаролейToolStripMenuItem.Click += new System.EventHandler(this.генераторПаролейToolStripMenuItem_Click);
-            // 
-            // оПрограммеToolStripMenuItem
-            // 
-            this.оПрограммеToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.superGeroyНаGiteToolStripMenuItem,
-            this.сайтToolStripMenuItem,
-            this.toolStripMenuItem1,
-            this.авторGlebBrainToolStripMenuItem});
-            this.оПрограммеToolStripMenuItem.Name = "оПрограммеToolStripMenuItem";
-            this.оПрограммеToolStripMenuItem.Size = new System.Drawing.Size(94, 20);
-            this.оПрограммеToolStripMenuItem.Text = "О программе";
-            // 
-            // superGeroyНаGiteToolStripMenuItem
-            // 
-            this.superGeroyНаGiteToolStripMenuItem.Name = "superGeroyНаGiteToolStripMenuItem";
-            this.superGeroyНаGiteToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
-            this.superGeroyНаGiteToolStripMenuItem.Text = "Git";
-            this.superGeroyНаGiteToolStripMenuItem.Click += new System.EventHandler(this.superGeroyНаGiteToolStripMenuItem_Click);
-            // 
-            // сайтToolStripMenuItem
-            // 
-            this.сайтToolStripMenuItem.Name = "сайтToolStripMenuItem";
-            this.сайтToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
-            this.сайтToolStripMenuItem.Text = "Сайт";
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(161, 6);
-            // 
-            // авторGlebBrainToolStripMenuItem
-            // 
-            this.авторGlebBrainToolStripMenuItem.Name = "авторGlebBrainToolStripMenuItem";
-            this.авторGlebBrainToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
-            this.авторGlebBrainToolStripMenuItem.Text = "Автор: GlebBrain";
-            this.авторGlebBrainToolStripMenuItem.Click += new System.EventHandler(this.авторGlebBrainToolStripMenuItem_Click);
             // 
             // настройкиToolStripMenuItem
             // 
@@ -730,6 +698,50 @@
             this.SuperTestEnabled.Size = new System.Drawing.Size(188, 22);
             this.SuperTestEnabled.Text = "Тестовый режим";
             this.SuperTestEnabled.Click += new System.EventHandler(this.SuperTestEnabled_Click);
+            // 
+            // оПрограммеToolStripMenuItem
+            // 
+            this.оПрограммеToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.superGeroyНаGiteToolStripMenuItem,
+            this.сайтToolStripMenuItem,
+            this.toolStripMenuItem1,
+            this.авторGlebBrainToolStripMenuItem});
+            this.оПрограммеToolStripMenuItem.Name = "оПрограммеToolStripMenuItem";
+            this.оПрограммеToolStripMenuItem.Size = new System.Drawing.Size(94, 20);
+            this.оПрограммеToolStripMenuItem.Text = "О программе";
+            // 
+            // superGeroyНаGiteToolStripMenuItem
+            // 
+            this.superGeroyНаGiteToolStripMenuItem.Name = "superGeroyНаGiteToolStripMenuItem";
+            this.superGeroyНаGiteToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.superGeroyНаGiteToolStripMenuItem.Text = "Git";
+            this.superGeroyНаGiteToolStripMenuItem.Click += new System.EventHandler(this.superGeroyНаGiteToolStripMenuItem_Click);
+            // 
+            // сайтToolStripMenuItem
+            // 
+            this.сайтToolStripMenuItem.Name = "сайтToolStripMenuItem";
+            this.сайтToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.сайтToolStripMenuItem.Text = "Скачать SuperGeroy";
+            this.сайтToolStripMenuItem.Click += new System.EventHandler(this.сайтToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(179, 6);
+            // 
+            // авторGlebBrainToolStripMenuItem
+            // 
+            this.авторGlebBrainToolStripMenuItem.Name = "авторGlebBrainToolStripMenuItem";
+            this.авторGlebBrainToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.авторGlebBrainToolStripMenuItem.Text = "Автор: GlebBrain";
+            this.авторGlebBrainToolStripMenuItem.Click += new System.EventHandler(this.авторGlebBrainToolStripMenuItem_Click);
+            // 
+            // справочникКодаToolStripMenuItem
+            // 
+            this.справочникКодаToolStripMenuItem.Name = "справочникКодаToolStripMenuItem";
+            this.справочникКодаToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
+            this.справочникКодаToolStripMenuItem.Text = "Справочник кода";
+            this.справочникКодаToolStripMenuItem.Click += new System.EventHandler(this.справочникКодаToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -835,6 +847,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem стандартныйРежимToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem SuperTestEnabled;
+        private System.Windows.Forms.ToolStripMenuItem справочникКодаToolStripMenuItem;
     }
 }
 

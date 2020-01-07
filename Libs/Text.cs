@@ -539,17 +539,17 @@ namespace SuperGeroy.Libs
             // 1. Удаление лишних пробелов
             r = input.Trim().Replace("   ", " ").Replace("  ", " ");
             // 1.1. Точки
-            r = r.Replace(" . ", ".");
+            r = r.Replace(" . ", ".").Replace(" .", ".").Replace(". ", ".");
             // 1.2. Остальные символы
             string p = "~`!@#$%^&*_+(){}[]<>|\\/;:,?№-=≪≫–";
-            string n = "";
             foreach (char s in p)
             {
                 r = r.Replace(" "+ s.ToString() + " ", s.ToString());
             }
             
             // 2. Установка пробелов в нужных местах
-            r = r.Replace(",", ", ").Replace(".", ". ").Replace(". . .", "... ").Replace(". .", ".. ").Replace("  ", " ");
+            r = r.Replace(",", ", ").Replace(".", ". ");
+            r = r.Replace(". . .", "... ").Replace(". .", ".. ").Replace("  ", " ");
             // 2.1. Кавычки
             r = r.Replace("≪", " ≪").Replace("≫", "≫ ");
             // 2.2. Двоеточие и точка с запятой
@@ -607,6 +607,46 @@ namespace SuperGeroy.Libs
                 i++;
             }
             return r;
+        }
+        /// <summary>
+        /// Убрать дубли символов
+        /// </summary>
+        /// <param name="input">Массив слов</param>
+        /// <param name="replace"></param>
+        /// <param name="modificator">Модификатор: !-символы, я-русские буквы, z-английские буквы</param>
+        /// <returns></returns>
+        public static string[] FindDublicateAndReplaceSimbols(string[] input, string replace, string modificator="!")
+        {
+            //TODO Модификатор
+
+            string[] w = new string[input.Length];
+            int i = 0, j=0;
+            foreach (string s in input)
+            {
+                // s - строка
+                string r = "";
+                foreach (char h in s)
+                {
+                    
+                    string u = "";
+                    // u - уникальные символы в слове
+                    if (u.IndexOf(h)<0 )
+                    {
+                        u += h;
+                        r += h;
+                    }
+                    // d - дубли
+                    else
+                    {
+                        r+= s.Replace(s, replace);
+                    }
+                    i++;
+                }
+                w[j]=r;
+                j++;
+                
+            }
+            return w;
         }
     }
 }

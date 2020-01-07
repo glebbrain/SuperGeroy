@@ -69,12 +69,20 @@ namespace SuperGeroy
             SuperTestEnabled.Checked = false;
             this.Text = "SuperGeroy";
         }
-
+        private void textBox5_Click(object sender, EventArgs e)
+        {
+            button1.Enabled = true;
+            comboBox4.Text = "Спец. символы";
+        }
         private void SuperTestEnabled_Click(object sender, EventArgs e)
         {
             стандартныйРежимToolStripMenuItem.Checked = false;
             SuperTestEnabled.Checked = true;
             this.Text = "SuperGeroy [Тестовый режим]";
+        }
+        private void сайтToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("http://supergeroy.com/download/publish.htm");
         }
         private void superGeroyНаGiteToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -90,7 +98,10 @@ namespace SuperGeroy
         {
             System.Diagnostics.Process.Start("https://glebrain.ru/randpass");
         }
-
+        private void справочникКодаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://glebrain.ru/all");
+        }
         private void настройкаGitВVisualStudioToolStripMenuItem_Click(object sender, EventArgs e)
         {
             System.Diagnostics.Process.Start("https://habr.com/ru/sandbox/112936/");
@@ -153,6 +164,10 @@ namespace SuperGeroy
             {
                 r = "{dublicat_words}";
             }
+            else if (text == "Дубликаты символов")
+            {
+                r = "{dublicat_simbols}";
+            }
             return r;
         }
         private string FindSpecSimbol = "";
@@ -186,17 +201,7 @@ namespace SuperGeroy
                     // Включен тестовый режим
                     if (SuperTestEnabled.Checked)
                     {
-                        textBox1.Text =
-                            "test@testgu.ru"
-                            + Environment.NewLine + "te.st@testgu.ru"
-                            + Environment.NewLine + "t.es-t@testgu.ru"
-                            + Environment.NewLine + "test@tes-tgu.ru"
-                            + Environment.NewLine + "test@dev.tes-tgu.ru"
-                            + Environment.NewLine + "ta_sd-es.t@dev.tes-tgu.ru"
-                            + Environment.NewLine + "----------------------------"
-                            + Environment.NewLine + "tasd-est@a.rutasd-est@a.ru"
-                            + Environment.NewLine + "сусликихомячутся@a.rutasd-est@a.ru"
-                        ;
+                        textBox1.Text = Tests.Text.FindAndReplace_RegEx.email();
                     }
                     break;
                 case 2:
@@ -204,25 +209,7 @@ namespace SuperGeroy
                     // Включен тестовый режим
                     if (SuperTestEnabled.Checked)
                     {
-                        textBox1.Text =
-                            "многотекста: +7 123 123 12 12 текст в тексте!"
-                            + Environment.NewLine + "+7 (123) 123 12 12"
-                            + Environment.NewLine + "+7(123) 123-12-12"
-                            + Environment.NewLine + "Тест+7 987 654-32-10"
-                            + Environment.NewLine + "8 123 123-12-12"
-                            + Environment.NewLine + "Тест+7(123) 123 00-00Тест"
-                            + Environment.NewLine + "Тест+7(123) 321 0000Тест"
-                            + Environment.NewLine + "+7(123) 1231212"
-                            + Environment.NewLine + "+7 1231231212"
-                            + Environment.NewLine + "+71231231212"
-                            + Environment.NewLine + "1231231212"
-                            + Environment.NewLine + "81231231212"
-                            + Environment.NewLine + "+11231231212"
-                            + Environment.NewLine + "+11231231212"
-                            + Environment.NewLine + "----------------------------"
-                            + Environment.NewLine + "Тетест10100186ТеСт79782434112Тестовый"
-                            + Environment.NewLine + "12-12-25"
-                        ;
+                        textBox1.Text = Tests.Text.FindAndReplace_RegEx.telephone();
                     }
                     break;
                 case 3:
@@ -230,17 +217,7 @@ namespace SuperGeroy
                     // Включен тестовый режим
                     if (SuperTestEnabled.Checked)
                     {
-                        textBox1.Text =
-                            "ftp://test.ru"
-                            + Environment.NewLine + "http://test.ru"
-                            + Environment.NewLine + "https://test.ru"
-                            + Environment.NewLine + "https://test.ru?a=b"
-                            + Environment.NewLine + "https://test.ru&a=b"
-                            + Environment.NewLine + "https://test.ru/catalog/product/test"
-                            + Environment.NewLine + "https://test.ru/catalog/product/test?price=10&count=1"
-                            + Environment.NewLine + "----------------------------"
-                            + Environment.NewLine + "ws://test.ru/catalog/product/test?price=10&count=1"
-                        ;
+                        textBox1.Text = Tests.Text.FindAndReplace_RegEx.url();
                     }
                     break;
                 case 4:
@@ -248,14 +225,8 @@ namespace SuperGeroy
                     // Включен тестовый режим
                     if (SuperTestEnabled.Checked)
                     {
-                        textBox1.Text =
-                            "0.0.0.0"
-                            + Environment.NewLine + "127.0.0.1"
-                            + Environment.NewLine + "8.8.8.8"
-                            + Environment.NewLine + "255.255.255.255"
-                            + Environment.NewLine + "----------------------------"
-                            + Environment.NewLine + "798.10.0.12"
-                        ;
+                        textBox1.Text = Tests.Text.FindAndReplace_RegEx.ip();
+                       
                     }
                     break;
                 default:
@@ -279,7 +250,9 @@ namespace SuperGeroy
                 button1.Enabled = true;
             }
             comboBox6.Text = "Регулярное выражение";
+            this.patternRegEx = "";
             comboBox5.SelectionLength = 0;
+            
         }
         private string ReplaceSpecSimbolCB4 = "";
         private void comboBox4_SelectedIndexChanged(object sender, EventArgs e)
@@ -351,106 +324,214 @@ namespace SuperGeroy
                 comboBox3.SelectedIndex = 1;
                 this.ReplaceSpecSimbol = "\r\n";
                 button5.Enabled = false;
+                // Если включен тестовый режим
+                if (SuperTestEnabled.Checked)
+                {
+                    textBox1.Text = Tests.Text.Format_Action.act_1();
+                }
             }
             // Transliteration
             else if (comboBox1.SelectedIndex == 2)
             {
+                // Если включен тестовый режим
+                if (SuperTestEnabled.Checked)
+                {
+                    textBox1.Text = Tests.Text.Format_Action.act_2();
+                }
                 WriteResult(Libs.Text.TranslitRuEn(textBox1.Text));
+
+                
             }
             // Capitalized first simbol on word
             else if (comboBox1.SelectedIndex == 3)
             {
+                // Если включен тестовый режим
+                if (SuperTestEnabled.Checked)
+                {
+                    textBox1.Text = Tests.Text.Format_Action.act_3();
+                }
                 WriteResult(Libs.Text.CapitalizedFirstSimbol(textBox1.Text.ToLower()));
+
             }
             // Capitalized first simbol on word without pretext
             else if (comboBox1.SelectedIndex == 4)
             {
+                // Если включен тестовый режим
+                if (SuperTestEnabled.Checked)
+                {
+                    textBox1.Text = Tests.Text.Format_Action.act_4();
+                }
                 WriteResult(Libs.Text.CapitalizedFirstSimbol(textBox1.Text.ToLower(), true));
             }
             // Все прописью
             else if (comboBox1.SelectedIndex == 6)
             {
+                // Если включен тестовый режим
+                if (SuperTestEnabled.Checked)
+                {
+                    textBox1.Text = Tests.Text.Format_Action.act_6();
+                }
                 WriteResult(textBox1.Text.ToLowerInvariant());
             }
             // Все Заглавной
             else if (comboBox1.SelectedIndex == 7)
             {
+                // Если включен тестовый режим
+                if (SuperTestEnabled.Checked)
+                {
+                    textBox1.Text = Tests.Text.Format_Action.act_7();
+                }
                 WriteResult(textBox1.Text.ToUpperInvariant());
             }
             // Убрать лишние пробелы
             else if (comboBox1.SelectedIndex == 9)
             {
+                // Если включен тестовый режим
+                if (SuperTestEnabled.Checked)
+                {
+                    textBox1.Text = Tests.Text.Format_Action.act_9();
+                }
                 WriteResult(textBox1.Text.Replace("   ", " ").Replace("  ", " ").ToString().Trim());
             }
             // Количество символов в начало строки
             else if (comboBox1.SelectedIndex == 10)
             {
+                // Если включен тестовый режим
+                if (SuperTestEnabled.Checked)
+                {
+                    textBox1.Text = Tests.Text.Format_Action.act_10();
+                }
                 WriteResult(Libs.Text.CalcCountSimbols(textBox1.Text));
             }
             // Перевернуть строку Reverse
             else if (comboBox1.SelectedIndex == 11)
             {
+                // Если включен тестовый режим
+                if (SuperTestEnabled.Checked)
+                {
+                    textBox1.Text = Tests.Text.Format_Action.act_11();
+                }
                 WriteResult(Libs.Text.Reverse(textBox1.Text));
             }
             // Сменить раскладку QWERTY с RU на EN
             else if (comboBox1.SelectedIndex == 13)
             {
+                // Если включен тестовый режим
+                if (SuperTestEnabled.Checked)
+                {
+                    textBox1.Text = Tests.Text.Format_Action.act_13();
+                }
                 WriteResult(Libs.Text.LayoutChange(textBox1.Text, false));
             }
             // Сменить раскладку QWERTY с EN на RU
             else if (comboBox1.SelectedIndex == 14)
             {
+                // Если включен тестовый режим
+                if (SuperTestEnabled.Checked)
+                {
+                    textBox1.Text = Tests.Text.Format_Action.act_14();
+                }
                 WriteResult(Libs.Text.LayoutChange(textBox1.Text));
             }
             // Сортировка строк от А до Я
             else if (comboBox1.SelectedIndex == 16)
             {
+                // Если включен тестовый режим
+                if (SuperTestEnabled.Checked)
+                {
+                    textBox1.Text = Tests.Text.Format_Action.act_16_18();
+                }
                 WriteResult(Libs.Text.SortStrings(textBox1.Text, Libs.Text.SortObject.Strings, Libs.Text.SortType.Sort));
             }
             // Сортировка строк от Я до А
             else if (comboBox1.SelectedIndex == 17)
             {
+                // Если включен тестовый режим
+                if (SuperTestEnabled.Checked)
+                {
+                    textBox1.Text = Tests.Text.Format_Action.act_16_18();
+                }
                 WriteResult(Libs.Text.SortStrings(textBox1.Text, Libs.Text.SortObject.Strings, Libs.Text.SortType.Reverse));
             }
             // + Случайная перестановка строк
             else if (comboBox1.SelectedIndex == 18)
             {
+                // Если включен тестовый режим
+                if (SuperTestEnabled.Checked)
+                {
+                    textBox1.Text = Tests.Text.Format_Action.act_16_18();
+                }
                 WriteResult(Libs.Text.SortStrings(textBox1.Text, Libs.Text.SortObject.Strings, Libs.Text.SortType.Random));
             }
             // Сортировка слов в строке от А до Я
             else if (comboBox1.SelectedIndex == 19)
             {
+                // Если включен тестовый режим
+                if (SuperTestEnabled.Checked)
+                {
+                    textBox1.Text = Tests.Text.Format_Action.act_19_21();
+                }
                 WriteResult(Libs.Text.SortStrings(textBox1.Text, Libs.Text.SortObject.Words, Libs.Text.SortType.Sort));
             }
             // Сортировка слов в строке от Я до А
             else if (comboBox1.SelectedIndex == 20)
             {
+                // Если включен тестовый режим
+                if (SuperTestEnabled.Checked)
+                {
+                    textBox1.Text = Tests.Text.Format_Action.act_19_21();
+                }
                 WriteResult(Libs.Text.SortStrings(textBox1.Text, Libs.Text.SortObject.Words, Libs.Text.SortType.Reverse));
             }
             // Случайная перестановка слов
             else if (comboBox1.SelectedIndex == 21)
             {
+                // Если включен тестовый режим
+                if (SuperTestEnabled.Checked)
+                {
+                    textBox1.Text = Tests.Text.Format_Action.act_19_21();
+                }
                 WriteResult(Libs.Text.SortStrings(textBox1.Text, Libs.Text.SortObject.Words, Libs.Text.SortType.Random));
             }
             // Сортировка букв в слове от А до Я
             else if (comboBox1.SelectedIndex == 22)
             {
+                // Если включен тестовый режим
+                if (SuperTestEnabled.Checked)
+                {
+                    textBox1.Text = Tests.Text.Format_Action.act_22_24();
+                }
                 WriteResult(Libs.Text.SortStrings(textBox1.Text, Libs.Text.SortObject.Simbols, Libs.Text.SortType.Sort));
             }
             // Сортировка букв в слове от Я до А
             else if (comboBox1.SelectedIndex == 23)
             {
+                // Если включен тестовый режим
+                if (SuperTestEnabled.Checked)
+                {
+                    textBox1.Text = Tests.Text.Format_Action.act_22_24();
+                }
                 WriteResult(Libs.Text.SortStrings(textBox1.Text, Libs.Text.SortObject.Simbols, Libs.Text.SortType.Reverse));
             }
             // Случайная перестановка букв
             else if (comboBox1.SelectedIndex == 24)
             {
+                // Если включен тестовый режим
+                if (SuperTestEnabled.Checked)
+                {
+                    textBox1.Text = Tests.Text.Format_Action.act_22_24();
+                }
                 WriteResult(Libs.Text.SortStrings(textBox1.Text, Libs.Text.SortObject.Simbols, Libs.Text.SortType.Random));
             }
             // Добавить текст в начало/конец строки,слова,символа
             //
             else if (comboBox1.SelectedIndex >= 26 && comboBox1.SelectedIndex <= 31)
             {
+                // Если включен тестовый режим
+                if (SuperTestEnabled.Checked)
+                {
+                    textBox1.Text = Tests.Text.Format_Action.act_26_31();
+                }
                 textBox4.Enabled = true;
                 comboBox3.Enabled = true;
                 button1.Enabled = true;
@@ -459,6 +540,11 @@ namespace SuperGeroy
             // Исправление пунктуации
             else if (comboBox1.SelectedIndex==33)
             {
+                // Если включен тестовый режим
+                if (SuperTestEnabled.Checked)
+                {
+                    textBox1.Text = Tests.Text.Format_Action.act_33();
+                }
                 // изменения пишутся в исходник
                 if (checkBox1.Checked) 
                 {
@@ -652,6 +738,12 @@ namespace SuperGeroy
                                     WriteResult(String.Join( " ", Libs.Text.FindDublicateAndReplace(textBox1.Text.Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries), this.ReplaceSpecSimbolCB4)));
                                 }
                             }
+                            // Дубликаты символов
+                            else if (this.FindSpecSimbolCB5 == "{dublicat_simbols}" && this.ReplaceSpecSimbolCB4 == "")
+                            {
+                                // ищем дубликаты и не изменяя структуры массива помечаим дубли, а затем заменяем их
+                                WriteResult(String.Join( " ", Libs.Text.FindDublicateAndReplaceSimbols(textBox1.Text.Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries), this.ReplaceSpecSimbolCB4)));
+                            }
                             // поиск всех: ~`!@#$%^&*(){}<>_-+=?.№;:|"},/'
                             else if (comboBox5.Text == "Все символы")
                             {
@@ -664,7 +756,7 @@ namespace SuperGeroy
                                 WriteResult(res);
                             }
                             // Поиск и замена по регулярным выражениям
-                            else if (this.patternRegEx != null)
+                            else if (!string.IsNullOrEmpty(this.patternRegEx))
                             {
                                 WriteResult(Libs.RegExpression.ReplaceStandartPattern(textBox1.Text, this.patternRegEx, this.ReplaceSpecSimbolCB4, SuperTestEnabled.Checked));
                             }
@@ -831,8 +923,12 @@ namespace SuperGeroy
 
 
 
+
+
+
+
         #endregion
 
-        
+     
     }
 }
