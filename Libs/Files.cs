@@ -24,30 +24,33 @@ namespace SuperGeroy.Libs
                             if (r.IndexOf('+') > -1)
                             {
                                 string pfn = "";
-                                string[] rs = r.Split('+');
+                                string[] rs = r.Replace("<","").Replace(">", "").Split('+');
                                 int start = 0, step = 1;
+                                string simbol="";
                                 // число
                                 if (rs[0].IndexOf("?") > -1)
                                 {
-
                                     string n = rs[0].Replace("?", "");
-                                    if (int.TryParse(rs[0], out start) && int.TryParse(rs[1], out step))
+                                    simbol = "?";
+                                    try
                                     {
-                                        pfn = (start + (npp * step)).ToString();
+                                        pfn = (int.Parse(n) + (npp * int.Parse(rs[1]))).ToString();
                                     }
+                                    catch{}
                                 }
                                 // буква
                                 else if (rs[0].IndexOf("\"") > -1)
                                 {
-
                                     string n = rs[0].Replace("\"", "");
-                                    if (int.TryParse(rs[0], out start) && int.TryParse(rs[1], out step))
+                                    simbol = "\"";
+                                    try
                                     {
-                                        pfn = Text.AlphabetEN(start + (npp * step));
+                                        pfn = Text.AlphabetEN(int.Parse(n) + (npp * int.Parse(rs[1])));
                                     }
+                                    catch{}
                                 }
                                 // меняем маску: <?1+2> на 3
-                                mask = mask.Replace("<" + r + ">", pfn);
+                                mask = mask.Replace(r, pfn);
                             }
                         }
                     }
@@ -57,7 +60,7 @@ namespace SuperGeroy.Libs
                 {
                     string ext = Path.GetExtension(fileName).Replace(".","");
                     string[] m = mask.Split(new string[] { ".*" },StringSplitOptions.RemoveEmptyEntries);
-                    mask = m[0] + ext;
+                    mask = m[0] +"."+ ext;
                 }
                 // формирование нового имени файла
                 fileName = Path.Combine(Path.GetFullPath(fileName).Replace(Path.GetFileName(fileName), "").Trim(), mask);

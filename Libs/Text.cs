@@ -164,9 +164,9 @@ namespace SuperGeroy.Libs
             string r = "";
             if (!string.IsNullOrEmpty(d))
             {
-                if (d.IndexOf(Environment.NewLine, System.StringComparison.OrdinalIgnoreCase) > -1)
+                if (d.IndexOf('\n') > -1)
                 {
-                    foreach (string s in d.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries))
+                    foreach (string s in d.Split(new string[] { Environment.NewLine, "\r\n", "\n", "\r" }, StringSplitOptions.RemoveEmptyEntries))
                     {
                         r += "[c пробелами: " + s.Length.ToString() + ", без: " + s.Replace(" ", "").Length.ToString() + "] " + s + Environment.NewLine;
                     }
@@ -280,17 +280,17 @@ namespace SuperGeroy.Libs
         public static string SortStrings(string d, SortObject so, SortType type)
         {
             string r = d;
-            if (!string.IsNullOrEmpty(d) && (d.IndexOf(Environment.NewLine, System.StringComparison.OrdinalIgnoreCase) >-1 || d.IndexOf(' ') > -1))
+            if (!string.IsNullOrEmpty(d) && (d.IndexOf('\n') >-1 || d.IndexOf(' ') > -1))
             {
                 string[] s = null;
                 if (so == SortObject.Strings)
                 {
-                    s = SuperSort(d.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries),type);
+                    s = SuperSort(d.Split(new string[] { Environment.NewLine,"\r\n","\n", "\r" }, StringSplitOptions.RemoveEmptyEntries),type);
                     r = String.Join(Environment.NewLine, s);
                 }
                 else if (so == SortObject.Words)
                 {
-                    s = d.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+                    s = d.Split(new string[] { Environment.NewLine, "\r\n", "\n", "\r" }, StringSplitOptions.RemoveEmptyEntries);
                     string[] words = null;
                     string sr = "";
                     if (s != null && s.Length > 0)
@@ -320,7 +320,7 @@ namespace SuperGeroy.Libs
                 }
                 else if (so == SortObject.Simbols)
                 {
-                    s = d.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+                    s = d.Split(new string[] { Environment.NewLine, "\r\n", "\n", "\r" }, StringSplitOptions.RemoveEmptyEntries);
                     string[] words = null;
                     string sr = "";
                     if (s != null && s.Length > 0)
@@ -432,7 +432,7 @@ namespace SuperGeroy.Libs
             switch (o)
             {
                 case SortObject.Strings:
-                    s = d.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+                    s = d.Split(new string[] { Environment.NewLine, "\r\n", "\n", "\r" }, StringSplitOptions.RemoveEmptyEntries);
                     if (s!=null && s.Length>0)
                     {
                         foreach (string t in s)
@@ -446,7 +446,7 @@ namespace SuperGeroy.Libs
                     }
                     break;
                 case SortObject.Words:
-                    s = d.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+                    s = d.Split(new string[] { Environment.NewLine, "\r\n", "\n", "\r" }, StringSplitOptions.RemoveEmptyEntries);
                     if (s != null && s.Length > 0)
                     {
                         foreach (string row in s)
@@ -475,7 +475,7 @@ namespace SuperGeroy.Libs
                     }
                     break;
                 case SortObject.Simbols:
-                    s = d.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+                    s = d.Split(new string[] { Environment.NewLine, "\r\n", "\n", "\r" }, StringSplitOptions.RemoveEmptyEntries);
                     if (s != null && s.Length > 0)
                     {
                         foreach (string row in s)

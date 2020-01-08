@@ -39,27 +39,27 @@ namespace SuperGeroy
             {
                 // фон
                 this.BackColor = Color.FromArgb(36, 36, 36);
-                textBox1.BackColor = Color.FromArgb(36, 36, 36);
-                textBox2.BackColor = Color.FromArgb(36, 36, 36);
+                richTextBox1.BackColor = Color.FromArgb(36, 36, 36);
+                richTextBox2.BackColor = Color.FromArgb(36, 36, 36);
                 tabPage1.BackColor = Color.FromArgb(36, 36, 36);
                 tabPage2.BackColor = Color.FromArgb(36, 36, 36);
 
                 // текст
                 this.ForeColor = Color.FromArgb(78, 164, 65);
-                textBox1.ForeColor = Color.FromArgb(78, 164, 65);
+                richTextBox1.ForeColor = Color.FromArgb(78, 164, 65);
             } 
             else
             {
                 // фон
                 this.BackColor = Color.FromKnownColor(KnownColor.Control);
-                textBox1.BackColor = Color.FromKnownColor(KnownColor.Window);
-                textBox2.BackColor = Color.FromKnownColor(KnownColor.Window);
+                richTextBox1.BackColor = Color.FromKnownColor(KnownColor.Window);
+                richTextBox2.BackColor = Color.FromKnownColor(KnownColor.Window);
                 tabPage1.BackColor = Color.FromKnownColor(KnownColor.Transparent);
                 tabPage2.BackColor = Color.FromKnownColor(KnownColor.Transparent);
 
                 // текст
                 this.ForeColor = Color.FromKnownColor(KnownColor.WindowText);
-                textBox1.ForeColor = Color.FromKnownColor(KnownColor.WindowText);
+                richTextBox1.ForeColor = Color.FromKnownColor(KnownColor.WindowText);
             }
 
         }
@@ -106,6 +106,10 @@ namespace SuperGeroy
         {
             System.Diagnostics.Process.Start("https://habr.com/ru/sandbox/112936/");
         }
+        private void comboBox7_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            button1.Enabled = true;
+        }
         /// <summary>
         /// Clear and set default values
         /// </summary>
@@ -113,8 +117,8 @@ namespace SuperGeroy
         /// <param name="e"></param>
         private void button2_Click(object sender, EventArgs e)
         {
-            textBox1.Text = "";
-            textBox2.Text = "";
+            richTextBox1.Text = "";
+            richTextBox2.Text = "";
             comboBox1.SelectedIndex = 0;
         }
         private static string SpecSimbolsCB(string text)
@@ -201,7 +205,7 @@ namespace SuperGeroy
                     // Включен тестовый режим
                     if (SuperTestEnabled.Checked)
                     {
-                        textBox1.Text = Tests.Text.FindAndReplace_RegEx.email();
+                        richTextBox1.Text = Tests.Text.FindAndReplace_RegEx.email();
                     }
                     break;
                 case 2:
@@ -209,7 +213,7 @@ namespace SuperGeroy
                     // Включен тестовый режим
                     if (SuperTestEnabled.Checked)
                     {
-                        textBox1.Text = Tests.Text.FindAndReplace_RegEx.telephone();
+                        richTextBox1.Text = Tests.Text.FindAndReplace_RegEx.telephone();
                     }
                     break;
                 case 3:
@@ -217,7 +221,7 @@ namespace SuperGeroy
                     // Включен тестовый режим
                     if (SuperTestEnabled.Checked)
                     {
-                        textBox1.Text = Tests.Text.FindAndReplace_RegEx.url();
+                        richTextBox1.Text = Tests.Text.FindAndReplace_RegEx.url();
                     }
                     break;
                 case 4:
@@ -225,7 +229,7 @@ namespace SuperGeroy
                     // Включен тестовый режим
                     if (SuperTestEnabled.Checked)
                     {
-                        textBox1.Text = Tests.Text.FindAndReplace_RegEx.ip();
+                        richTextBox1.Text = Tests.Text.FindAndReplace_RegEx.ip();
                        
                     }
                     break;
@@ -327,7 +331,7 @@ namespace SuperGeroy
                 // Если включен тестовый режим
                 if (SuperTestEnabled.Checked)
                 {
-                    textBox1.Text = Tests.Text.Format_Action.act_1();
+                    richTextBox1.Text = Tests.Text.Format_Action.act_1();
                 }
             }
             // Transliteration
@@ -336,9 +340,9 @@ namespace SuperGeroy
                 // Если включен тестовый режим
                 if (SuperTestEnabled.Checked)
                 {
-                    textBox1.Text = Tests.Text.Format_Action.act_2();
+                    richTextBox1.Text = Tests.Text.Format_Action.act_2();
                 }
-                WriteResult(Libs.Text.TranslitRuEn(textBox1.Text));
+                WriteResult(Libs.Text.TranslitRuEn(richTextBox1.Text));
 
                 
             }
@@ -348,9 +352,9 @@ namespace SuperGeroy
                 // Если включен тестовый режим
                 if (SuperTestEnabled.Checked)
                 {
-                    textBox1.Text = Tests.Text.Format_Action.act_3();
+                    richTextBox1.Text = Tests.Text.Format_Action.act_3();
                 }
-                WriteResult(Libs.Text.CapitalizedFirstSimbol(textBox1.Text.ToLower()));
+                WriteResult(Libs.Text.CapitalizedFirstSimbol(richTextBox1.Text.ToLower()));
 
             }
             // Capitalized first simbol on word without pretext
@@ -359,9 +363,9 @@ namespace SuperGeroy
                 // Если включен тестовый режим
                 if (SuperTestEnabled.Checked)
                 {
-                    textBox1.Text = Tests.Text.Format_Action.act_4();
+                    richTextBox1.Text = Tests.Text.Format_Action.act_4();
                 }
-                WriteResult(Libs.Text.CapitalizedFirstSimbol(textBox1.Text.ToLower(), true));
+                WriteResult(Libs.Text.CapitalizedFirstSimbol(richTextBox1.Text.ToLower(), true));
             }
             // Все прописью
             else if (comboBox1.SelectedIndex == 6)
@@ -369,9 +373,9 @@ namespace SuperGeroy
                 // Если включен тестовый режим
                 if (SuperTestEnabled.Checked)
                 {
-                    textBox1.Text = Tests.Text.Format_Action.act_6();
+                    richTextBox1.Text = Tests.Text.Format_Action.act_6();
                 }
-                WriteResult(textBox1.Text.ToLowerInvariant());
+                WriteResult(richTextBox1.Text.ToLowerInvariant());
             }
             // Все Заглавной
             else if (comboBox1.SelectedIndex == 7)
@@ -379,9 +383,9 @@ namespace SuperGeroy
                 // Если включен тестовый режим
                 if (SuperTestEnabled.Checked)
                 {
-                    textBox1.Text = Tests.Text.Format_Action.act_7();
+                    richTextBox1.Text = Tests.Text.Format_Action.act_7();
                 }
-                WriteResult(textBox1.Text.ToUpperInvariant());
+                WriteResult(richTextBox1.Text.ToUpperInvariant());
             }
             // Убрать лишние пробелы
             else if (comboBox1.SelectedIndex == 9)
@@ -389,9 +393,9 @@ namespace SuperGeroy
                 // Если включен тестовый режим
                 if (SuperTestEnabled.Checked)
                 {
-                    textBox1.Text = Tests.Text.Format_Action.act_9();
+                    richTextBox1.Text = Tests.Text.Format_Action.act_9();
                 }
-                WriteResult(textBox1.Text.Replace("   ", " ").Replace("  ", " ").ToString().Trim());
+                WriteResult(richTextBox1.Text.Replace("   ", " ").Replace("  ", " ").ToString().Trim());
             }
             // Количество символов в начало строки
             else if (comboBox1.SelectedIndex == 10)
@@ -399,9 +403,9 @@ namespace SuperGeroy
                 // Если включен тестовый режим
                 if (SuperTestEnabled.Checked)
                 {
-                    textBox1.Text = Tests.Text.Format_Action.act_10();
+                    richTextBox1.Text = Tests.Text.Format_Action.act_10();
                 }
-                WriteResult(Libs.Text.CalcCountSimbols(textBox1.Text));
+                WriteResult(Libs.Text.CalcCountSimbols(richTextBox1.Text));
             }
             // Перевернуть строку Reverse
             else if (comboBox1.SelectedIndex == 11)
@@ -409,9 +413,9 @@ namespace SuperGeroy
                 // Если включен тестовый режим
                 if (SuperTestEnabled.Checked)
                 {
-                    textBox1.Text = Tests.Text.Format_Action.act_11();
+                    richTextBox1.Text = Tests.Text.Format_Action.act_11();
                 }
-                WriteResult(Libs.Text.Reverse(textBox1.Text));
+                WriteResult(Libs.Text.Reverse(richTextBox1.Text));
             }
             // Сменить раскладку QWERTY с RU на EN
             else if (comboBox1.SelectedIndex == 13)
@@ -419,9 +423,9 @@ namespace SuperGeroy
                 // Если включен тестовый режим
                 if (SuperTestEnabled.Checked)
                 {
-                    textBox1.Text = Tests.Text.Format_Action.act_13();
+                    richTextBox1.Text = Tests.Text.Format_Action.act_13();
                 }
-                WriteResult(Libs.Text.LayoutChange(textBox1.Text, false));
+                WriteResult(Libs.Text.LayoutChange(richTextBox1.Text, false));
             }
             // Сменить раскладку QWERTY с EN на RU
             else if (comboBox1.SelectedIndex == 14)
@@ -429,9 +433,9 @@ namespace SuperGeroy
                 // Если включен тестовый режим
                 if (SuperTestEnabled.Checked)
                 {
-                    textBox1.Text = Tests.Text.Format_Action.act_14();
+                    richTextBox1.Text = Tests.Text.Format_Action.act_14();
                 }
-                WriteResult(Libs.Text.LayoutChange(textBox1.Text));
+                WriteResult(Libs.Text.LayoutChange(richTextBox1.Text));
             }
             // Сортировка строк от А до Я
             else if (comboBox1.SelectedIndex == 16)
@@ -439,9 +443,9 @@ namespace SuperGeroy
                 // Если включен тестовый режим
                 if (SuperTestEnabled.Checked)
                 {
-                    textBox1.Text = Tests.Text.Format_Action.act_16_18();
+                    richTextBox1.Text = Tests.Text.Format_Action.act_16_18();
                 }
-                WriteResult(Libs.Text.SortStrings(textBox1.Text, Libs.Text.SortObject.Strings, Libs.Text.SortType.Sort));
+                WriteResult(Libs.Text.SortStrings(richTextBox1.Text, Libs.Text.SortObject.Strings, Libs.Text.SortType.Sort));
             }
             // Сортировка строк от Я до А
             else if (comboBox1.SelectedIndex == 17)
@@ -449,9 +453,9 @@ namespace SuperGeroy
                 // Если включен тестовый режим
                 if (SuperTestEnabled.Checked)
                 {
-                    textBox1.Text = Tests.Text.Format_Action.act_16_18();
+                    richTextBox1.Text = Tests.Text.Format_Action.act_16_18();
                 }
-                WriteResult(Libs.Text.SortStrings(textBox1.Text, Libs.Text.SortObject.Strings, Libs.Text.SortType.Reverse));
+                WriteResult(Libs.Text.SortStrings(richTextBox1.Text, Libs.Text.SortObject.Strings, Libs.Text.SortType.Reverse));
             }
             // + Случайная перестановка строк
             else if (comboBox1.SelectedIndex == 18)
@@ -459,9 +463,9 @@ namespace SuperGeroy
                 // Если включен тестовый режим
                 if (SuperTestEnabled.Checked)
                 {
-                    textBox1.Text = Tests.Text.Format_Action.act_16_18();
+                    richTextBox1.Text = Tests.Text.Format_Action.act_16_18();
                 }
-                WriteResult(Libs.Text.SortStrings(textBox1.Text, Libs.Text.SortObject.Strings, Libs.Text.SortType.Random));
+                WriteResult(Libs.Text.SortStrings(richTextBox1.Text, Libs.Text.SortObject.Strings, Libs.Text.SortType.Random));
             }
             // Сортировка слов в строке от А до Я
             else if (comboBox1.SelectedIndex == 19)
@@ -469,9 +473,9 @@ namespace SuperGeroy
                 // Если включен тестовый режим
                 if (SuperTestEnabled.Checked)
                 {
-                    textBox1.Text = Tests.Text.Format_Action.act_19_21();
+                    richTextBox1.Text = Tests.Text.Format_Action.act_19_21();
                 }
-                WriteResult(Libs.Text.SortStrings(textBox1.Text, Libs.Text.SortObject.Words, Libs.Text.SortType.Sort));
+                WriteResult(Libs.Text.SortStrings(richTextBox1.Text, Libs.Text.SortObject.Words, Libs.Text.SortType.Sort));
             }
             // Сортировка слов в строке от Я до А
             else if (comboBox1.SelectedIndex == 20)
@@ -479,9 +483,9 @@ namespace SuperGeroy
                 // Если включен тестовый режим
                 if (SuperTestEnabled.Checked)
                 {
-                    textBox1.Text = Tests.Text.Format_Action.act_19_21();
+                    richTextBox1.Text = Tests.Text.Format_Action.act_19_21();
                 }
-                WriteResult(Libs.Text.SortStrings(textBox1.Text, Libs.Text.SortObject.Words, Libs.Text.SortType.Reverse));
+                WriteResult(Libs.Text.SortStrings(richTextBox1.Text, Libs.Text.SortObject.Words, Libs.Text.SortType.Reverse));
             }
             // Случайная перестановка слов
             else if (comboBox1.SelectedIndex == 21)
@@ -489,9 +493,9 @@ namespace SuperGeroy
                 // Если включен тестовый режим
                 if (SuperTestEnabled.Checked)
                 {
-                    textBox1.Text = Tests.Text.Format_Action.act_19_21();
+                    richTextBox1.Text = Tests.Text.Format_Action.act_19_21();
                 }
-                WriteResult(Libs.Text.SortStrings(textBox1.Text, Libs.Text.SortObject.Words, Libs.Text.SortType.Random));
+                WriteResult(Libs.Text.SortStrings(richTextBox1.Text, Libs.Text.SortObject.Words, Libs.Text.SortType.Random));
             }
             // Сортировка букв в слове от А до Я
             else if (comboBox1.SelectedIndex == 22)
@@ -499,9 +503,9 @@ namespace SuperGeroy
                 // Если включен тестовый режим
                 if (SuperTestEnabled.Checked)
                 {
-                    textBox1.Text = Tests.Text.Format_Action.act_22_24();
+                    richTextBox1.Text = Tests.Text.Format_Action.act_22_24();
                 }
-                WriteResult(Libs.Text.SortStrings(textBox1.Text, Libs.Text.SortObject.Simbols, Libs.Text.SortType.Sort));
+                WriteResult(Libs.Text.SortStrings(richTextBox1.Text, Libs.Text.SortObject.Simbols, Libs.Text.SortType.Sort));
             }
             // Сортировка букв в слове от Я до А
             else if (comboBox1.SelectedIndex == 23)
@@ -509,9 +513,9 @@ namespace SuperGeroy
                 // Если включен тестовый режим
                 if (SuperTestEnabled.Checked)
                 {
-                    textBox1.Text = Tests.Text.Format_Action.act_22_24();
+                    richTextBox1.Text = Tests.Text.Format_Action.act_22_24();
                 }
-                WriteResult(Libs.Text.SortStrings(textBox1.Text, Libs.Text.SortObject.Simbols, Libs.Text.SortType.Reverse));
+                WriteResult(Libs.Text.SortStrings(richTextBox1.Text, Libs.Text.SortObject.Simbols, Libs.Text.SortType.Reverse));
             }
             // Случайная перестановка букв
             else if (comboBox1.SelectedIndex == 24)
@@ -519,9 +523,9 @@ namespace SuperGeroy
                 // Если включен тестовый режим
                 if (SuperTestEnabled.Checked)
                 {
-                    textBox1.Text = Tests.Text.Format_Action.act_22_24();
+                    richTextBox1.Text = Tests.Text.Format_Action.act_22_24();
                 }
-                WriteResult(Libs.Text.SortStrings(textBox1.Text, Libs.Text.SortObject.Simbols, Libs.Text.SortType.Random));
+                WriteResult(Libs.Text.SortStrings(richTextBox1.Text, Libs.Text.SortObject.Simbols, Libs.Text.SortType.Random));
             }
             // Добавить текст в начало/конец строки,слова,символа
             //
@@ -530,7 +534,7 @@ namespace SuperGeroy
                 // Если включен тестовый режим
                 if (SuperTestEnabled.Checked)
                 {
-                    textBox1.Text = Tests.Text.Format_Action.act_26_31();
+                    richTextBox1.Text = Tests.Text.Format_Action.act_26_31();
                 }
                 textBox4.Enabled = true;
                 comboBox3.Enabled = true;
@@ -543,20 +547,20 @@ namespace SuperGeroy
                 // Если включен тестовый режим
                 if (SuperTestEnabled.Checked)
                 {
-                    textBox1.Text = Tests.Text.Format_Action.act_33();
+                    richTextBox1.Text = Tests.Text.Format_Action.act_33();
                 }
                 // изменения пишутся в исходник
                 if (checkBox1.Checked) 
                 {
-                    WriteResult(Libs.Text.FixPunctuation(textBox1.Text));
+                    WriteResult(Libs.Text.FixPunctuation(richTextBox1.Text));
                     Thread.Sleep(100);
-                    WriteResult(Libs.Text.FixPunctuation(textBox1.Text));
+                    WriteResult(Libs.Text.FixPunctuation(richTextBox1.Text));
                 }
                 else
                 {
-                    WriteResult(Libs.Text.FixPunctuation(textBox1.Text));
+                    WriteResult(Libs.Text.FixPunctuation(richTextBox1.Text));
                     Thread.Sleep(100);
-                    WriteResult(Libs.Text.FixPunctuation(textBox2.Text));
+                    WriteResult(Libs.Text.FixPunctuation(richTextBox2.Text));
                 }
             }
             comboBox1.SelectionLength = 0;
@@ -618,7 +622,7 @@ namespace SuperGeroy
             // Текст
             if (tabControl1.SelectedIndex==0) // Текст
             {
-                if (textBox1.Text != "")
+                if (richTextBox1.Text != "")
                 {
                     // Разбить текст на строки по символу или тексту
                     // find: textBox3 and comboBox2
@@ -632,12 +636,12 @@ namespace SuperGeroy
                         {
                             if (textBox4.Text.Length > 0)
                             {
-                                WriteResult(String.Join(textBox4.Text, textBox1.Text.Split(new string[] { textBox3.Text }, StringSplitOptions.RemoveEmptyEntries)));
+                                WriteResult(String.Join(textBox4.Text, richTextBox1.Text.Split(new string[] { textBox3.Text }, StringSplitOptions.RemoveEmptyEntries)));
                             }
                             else if (comboBox3.Text.Length > 0 && comboBox3.Text != "Спец. символы")
                             {
 
-                                WriteResult(String.Join(this.ReplaceSpecSimbol, textBox1.Text.Split(new string[] { textBox3.Text }, StringSplitOptions.RemoveEmptyEntries)));
+                                WriteResult(String.Join(this.ReplaceSpecSimbol, richTextBox1.Text.Split(new string[] { textBox3.Text }, StringSplitOptions.RemoveEmptyEntries)));
                             }
 
                         }
@@ -645,11 +649,11 @@ namespace SuperGeroy
                         {
                             if (textBox4.Text.Length > 0)
                             {
-                                WriteResult(String.Join(textBox4.Text, textBox1.Text.Split(new string[] { this.FindSpecSimbol }, StringSplitOptions.RemoveEmptyEntries)));
+                                WriteResult(String.Join(textBox4.Text, richTextBox1.Text.Split(new string[] { this.FindSpecSimbol }, StringSplitOptions.RemoveEmptyEntries)));
                             }
                             else if (comboBox3.Text.Length > 0 && comboBox3.Text != "Спец. символы")
                             {
-                                WriteResult(String.Join(this.ReplaceSpecSimbol, textBox1.Text.Split(new string[] { this.FindSpecSimbol }, StringSplitOptions.RemoveEmptyEntries)));
+                                WriteResult(String.Join(this.ReplaceSpecSimbol, richTextBox1.Text.Split(new string[] { this.FindSpecSimbol }, StringSplitOptions.RemoveEmptyEntries)));
                             }
 
                         }
@@ -667,32 +671,32 @@ namespace SuperGeroy
                     // Добавить текст перед строкой
                     else if (comboBox1.SelectedIndex == 26)
                     {
-                        WriteResult(Libs.Text.AddText(textBox1.Text, TextJoin, Libs.Text.SortObject.Strings, Libs.Text.TypeAppend.Forward));
+                        WriteResult(Libs.Text.AddText(richTextBox1.Text, TextJoin, Libs.Text.SortObject.Strings, Libs.Text.TypeAppend.Forward));
                     }
                     // Добавить текст после строки
                     else if (comboBox1.SelectedIndex == 27)
                     {
-                        WriteResult(Libs.Text.AddText(textBox1.Text, TextJoin, Libs.Text.SortObject.Strings, Libs.Text.TypeAppend.Back));
+                        WriteResult(Libs.Text.AddText(richTextBox1.Text, TextJoin, Libs.Text.SortObject.Strings, Libs.Text.TypeAppend.Back));
                     }
                     // Добавить текст перед словом
                     else if (comboBox1.SelectedIndex == 28)
                     {
-                        WriteResult(Libs.Text.AddText(textBox1.Text, TextJoin, Libs.Text.SortObject.Words, Libs.Text.TypeAppend.Forward));
+                        WriteResult(Libs.Text.AddText(richTextBox1.Text, TextJoin, Libs.Text.SortObject.Words, Libs.Text.TypeAppend.Forward));
                     }
                     // Добавить текст после слова
                     else if (comboBox1.SelectedIndex == 29)
                     {
-                        WriteResult(Libs.Text.AddText(textBox1.Text, TextJoin, Libs.Text.SortObject.Words, Libs.Text.TypeAppend.Back));
+                        WriteResult(Libs.Text.AddText(richTextBox1.Text, TextJoin, Libs.Text.SortObject.Words, Libs.Text.TypeAppend.Back));
                     }
                     // Добавить текст перед буквой
                     else if (comboBox1.SelectedIndex == 30)
                     {
-                        WriteResult(Libs.Text.AddText(textBox1.Text, TextJoin, Libs.Text.SortObject.Simbols, Libs.Text.TypeAppend.Forward));
+                        WriteResult(Libs.Text.AddText(richTextBox1.Text, TextJoin, Libs.Text.SortObject.Simbols, Libs.Text.TypeAppend.Forward));
                     }
                     // Добавить текст после буквы
                     else if (comboBox1.SelectedIndex == 31)
                     {
-                        WriteResult(Libs.Text.AddText(textBox1.Text, TextJoin, Libs.Text.SortObject.Simbols, Libs.Text.TypeAppend.Back));
+                        WriteResult(Libs.Text.AddText(richTextBox1.Text, TextJoin, Libs.Text.SortObject.Simbols, Libs.Text.TypeAppend.Back));
                     }
                     // Поиск
                     else if (textBox6.Text.Length > 0 ||
@@ -715,12 +719,12 @@ namespace SuperGeroy
                                 if (this.ReplaceSpecSimbolCB4 == "")
                                 {
                                     // удаляем дубликаты через Distinct
-                                    WriteResult(String.Join(Environment.NewLine, textBox1.Text.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries).Where(s => s != "").Distinct().ToArray()));
+                                    WriteResult(String.Join(Environment.NewLine, richTextBox1.Text.Split(new string[] { Environment.NewLine, "\r\n", "\n", "\r" }, StringSplitOptions.RemoveEmptyEntries).Where(s => s != "").Distinct().ToArray()));
                                 } 
                                 else
                                 {
                                     // ищем дубликаты и не изменяя структуры массива помечаим дубли, а затем заменяем их
-                                    WriteResult(String.Join(Environment.NewLine, Libs.Text.FindDublicateAndReplace(textBox1.Text.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries), this.ReplaceSpecSimbolCB4)));
+                                    WriteResult(String.Join(Environment.NewLine, Libs.Text.FindDublicateAndReplace(richTextBox1.Text.Split(new string[] { Environment.NewLine, "\r\n", "\n", "\r" }, StringSplitOptions.RemoveEmptyEntries), this.ReplaceSpecSimbolCB4)));
                                 }
                                 
                             }
@@ -730,25 +734,25 @@ namespace SuperGeroy
                                 if (this.ReplaceSpecSimbolCB4 == "")
                                 {
                                     // бьём по пробелам, потом через Distinct удаляем дубли и обратно соединяем по пробелам
-                                    WriteResult(String.Join(" ", textBox1.Text.Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries).Where(s => s != "").Distinct().ToArray()));
+                                    WriteResult(String.Join(" ", richTextBox1.Text.Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries).Where(s => s != "").Distinct().ToArray()));
                                 }
                                 else
                                 {
                                     // ищем дубликаты и не изменяя структуры массива помечаим дубли, а затем заменяем их
-                                    WriteResult(String.Join( " ", Libs.Text.FindDublicateAndReplace(textBox1.Text.Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries), this.ReplaceSpecSimbolCB4)));
+                                    WriteResult(String.Join( " ", Libs.Text.FindDublicateAndReplace(richTextBox1.Text.Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries), this.ReplaceSpecSimbolCB4)));
                                 }
                             }
                             // Дубликаты символов
                             else if (this.FindSpecSimbolCB5 == "{dublicat_simbols}" && this.ReplaceSpecSimbolCB4 == "")
                             {
                                 // ищем дубликаты и не изменяя структуры массива помечаим дубли, а затем заменяем их
-                                WriteResult(String.Join( " ", Libs.Text.FindDublicateAndReplaceSimbols(textBox1.Text.Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries), this.ReplaceSpecSimbolCB4)));
+                                WriteResult(String.Join( " ", Libs.Text.FindDublicateAndReplaceSimbols(richTextBox1.Text.Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries), this.ReplaceSpecSimbolCB4)));
                             }
                             // поиск всех: ~`!@#$%^&*(){}<>_-+=?.№;:|"},/'
                             else if (comboBox5.Text == "Все символы")
                             {
                                 //TODO: Перенести в Libs.Text
-                                string res = textBox1.Text;
+                                string res = richTextBox1.Text;
                                 foreach (char s in this.FindSpecSimbolCB5.ToArray())
                                 {
                                     res = res.Replace(s.ToString(), textRepl);
@@ -758,11 +762,11 @@ namespace SuperGeroy
                             // Поиск и замена по регулярным выражениям
                             else if (!string.IsNullOrEmpty(this.patternRegEx))
                             {
-                                WriteResult(Libs.RegExpression.ReplaceStandartPattern(textBox1.Text, this.patternRegEx, this.ReplaceSpecSimbolCB4, SuperTestEnabled.Checked));
+                                WriteResult(Libs.RegExpression.ReplaceStandartPattern(richTextBox1.Text, this.patternRegEx, this.ReplaceSpecSimbolCB4, SuperTestEnabled.Checked));
                             }
                             else
                             {
-                                WriteResult(textBox1.Text.Replace(textFind, textRepl));
+                                WriteResult(richTextBox1.Text.Replace(textFind, textRepl));
                             }
                         } 
                         /// Поиск
@@ -771,7 +775,7 @@ namespace SuperGeroy
                             if (this.FindSpecSimbolCB5 == "{dublicat_strings}" && this.ReplaceSpecSimbolCB4 == "")
                             {
                                 // выводим дубликаты
-                                WriteResult(String.Join(Environment.NewLine, Libs.Text.FindDublicate(find.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries))));
+                                WriteResult(String.Join(Environment.NewLine, Libs.Text.FindDublicate(find.Split(new string[] { Environment.NewLine, "\r\n", "\n", "\r" }, StringSplitOptions.RemoveEmptyEntries))));
                             }
                             // Дубликаты слов
                             else if (this.FindSpecSimbolCB5 == "{dublicat_words}" && this.ReplaceSpecSimbolCB4 == "")
@@ -782,18 +786,18 @@ namespace SuperGeroy
                             // Поиск по регулярным выражениям
                             else if (this.patternRegEx != null)
                             {
-                                WriteResult(Libs.RegExpression.FindStandartPattern(textBox1.Text,this.patternRegEx,SuperTestEnabled.Checked));
+                                WriteResult(Libs.RegExpression.FindStandartPattern(richTextBox1.Text,this.patternRegEx,SuperTestEnabled.Checked));
                             }
                             else
                             {
                                 //TODO: Перенести в Libs.Text
                                 //выводит строки содержащие искомое
                                 string textFind = textBox6.Text.Length > 0 ? textBox6.Text : this.FindSpecSimbolCB5;
-                                if (textBox1.Text.IndexOf(textFind, System.StringComparison.OrdinalIgnoreCase) > -1)
+                                if (richTextBox1.Text.IndexOf(textFind, System.StringComparison.OrdinalIgnoreCase) > -1)
                                 {
-                                    if (textBox1.Text.IndexOf(Environment.NewLine, System.StringComparison.OrdinalIgnoreCase) > -1)
+                                    if (richTextBox1.Text.IndexOf('\n') > -1)
                                     {
-                                        foreach (var row in textBox1.Text.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries))
+                                        foreach (var row in richTextBox1.Text.Split(new string[] { Environment.NewLine, "\r\n", "\n", "\r" }, StringSplitOptions.RemoveEmptyEntries))
                                         {
                                             if (row.IndexOf(textFind, System.StringComparison.OrdinalIgnoreCase) > -1)
                                             {
@@ -816,14 +820,15 @@ namespace SuperGeroy
             else if (tabControl1.SelectedIndex == 1) 
             {
                 // путь к директории с файлами:
-                if (!string.IsNullOrEmpty(textBox1.Text) && !string.IsNullOrEmpty(comboBox7.Text))
+                if (!string.IsNullOrEmpty(richTextBox1.Text) && !string.IsNullOrEmpty(comboBox7.Text))
                 {
-                    if (Directory.Exists(textBox1.Text))
+                    if (Directory.Exists(richTextBox1.Text))
                     {
                         string newfile = "", msg="";
-                        int i = 0, cntfiles = Directory.GetFiles(textBox1.Text).Length;
+                        int i = 0, cntfiles = Directory.GetFiles(richTextBox1.Text).Length;
                         toolStripProgressBar1.Maximum = cntfiles;
-                        foreach (var file in Directory.GetFiles(textBox1.Text))
+                        toolStripProgressBar1.Value = 0;
+                        foreach (var file in Directory.GetFiles(richTextBox1.Text))
                         {
                             // асинхронный вызов, для отображения данных на форме
                             Dispatcher.Invoke(this, () =>
@@ -832,30 +837,31 @@ namespace SuperGeroy
                                 try
                                 {
                                     File.Move(file, newfile);
-                                    msg = "'" + file + "' => '" + newfile + "'";
+                                    msg = "'" + file + "' => '" + newfile + "'" + Environment.NewLine;
                                 }
                                 catch (Exception ex) 
                                 {
-                                    msg = "При переименовании из '" + file + "' в '"+ newfile + "' возникла ошибка: '" + ex.Message + "'";
+                                    msg = "При переименовании из '" + file + "' в '"+ newfile + "' возникла ошибка: '" + ex.Message + "'" + Environment.NewLine;
                                 }
-                                textBox2.Text += msg;
+                                richTextBox2.Text += msg;
                                 // прокручивание на последнюю строку
-                                textBox2.SelectionStart = textBox2.Text.Length;
-                                textBox2.ScrollToCaret();
+                                richTextBox2.SelectionStart = richTextBox2.Text.Length;
+                                richTextBox2.ScrollToCaret();
                                 // обработанные файлы
                                 toolStripStatusLabel1.Text = (i+1)+ " / "+ cntfiles;
                                 // отображение прогресса
-                                toolStripProgressBar1.Value += 1; 
-
+                                toolStripProgressBar1.Value += 1;
+                                i++;
                             });
 
                         }
+
                     }
                     else
                     {
-                        if (MessageBox.Show("Указанной '" + textBox1.Text + "' директории не существует!") == DialogResult.OK)
+                        if (MessageBox.Show("Указанной '" + richTextBox1.Text + "' директории не существует!") == DialogResult.OK)
                         {
-                            textBox1.Focus();
+                            richTextBox1.Focus();
                         }
                     }
                 }
@@ -863,26 +869,26 @@ namespace SuperGeroy
                 {
                     if (MessageBox.Show("В левом верхнем текстовом поле должен быть указан каталог!") == DialogResult.OK)
                     {
-                        textBox1.Focus();
+                        richTextBox1.Focus();
                     }
                 } 
             }
         }
         /// <summary>
-        /// Результат из textbox2.Text в textbox1.Text
+        /// Результат из richTextBox2.Text в textbox1.Text
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void button3_Click(object sender, EventArgs e)
         {
-            textBox1.Text = textBox2.Text;
-            textBox2.Text = "";
+            richTextBox1.Text = richTextBox2.Text;
+            richTextBox2.Text = "";
         }
         private void button4_Click(object sender, EventArgs e)
         {
-            string s = textBox1.Text;
-            textBox1.Text = textBox2.Text;
-            textBox2.Text = s;
+            string s = richTextBox1.Text;
+            richTextBox1.Text = richTextBox2.Text;
+            richTextBox2.Text = s;
         }
         /// <summary>
         /// Добавление результата к исходному тексту
@@ -891,8 +897,8 @@ namespace SuperGeroy
         /// <param name="e"></param>
         private void button6_Click(object sender, EventArgs e)
         {
-            textBox1.Text += Environment.NewLine + textBox2.Text;
-            textBox2.Text = "";
+            richTextBox1.Text += Environment.NewLine + richTextBox2.Text;
+            richTextBox2.Text = "";
         }
         #endregion
 
@@ -902,33 +908,14 @@ namespace SuperGeroy
             // Изменение пишутся в исходник
             if (checkBox1.Checked)
             {
-                textBox1.Text = d;
+                richTextBox1.Text = d;
             }
             // Изменения записываются во второе окно
             else
             {
-                textBox2.Text = d;
+                richTextBox2.Text = d;
             }
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         #endregion
-
-     
     }
 }

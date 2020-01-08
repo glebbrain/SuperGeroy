@@ -113,39 +113,39 @@ namespace SuperGeroy.Tests
            */
             public static string act_1() { return "Много интересного и привлекательного текста, несущего в себе безграничные знания"; }
             public static string act_2() {
-                return    "1  - А\r\n"
-                        + "2  - Б\r\n"
-                        + "3  - В\r\n"
-                        + "4  - Г\r\n"
-                        + "5  - Д\r\n"
-                        + "6  - Е\r\n"
-                        + "7  - Ё\r\n"
-                        + "8  - Ж\r\n"
-                        + "9  - З\r\n"
-                        + "10 - И\r\n"
-                        + "11 - Й\r\n"
-                        + "12 - К\r\n"
-                        + "13 - Л\r\n"
-                        + "14 - М\r\n"
-                        + "15 - Н\r\n"
-                        + "16 - О\r\n"
-                        + "17 - П\r\n"
-                        + "18 - Р\r\n"
-                        + "19 - С\r\n"
-                        + "20 - Т\r\n"
-                        + "21 - У\r\n"
-                        + "22 - Ф\r\n"
-                        + "23 - Х\r\n"
-                        + "24 - Ц\r\n"
-                        + "25 - Ч\r\n"
-                        + "26 - Ш\r\n"
-                        + "27 - Щ\r\n"
-                        + "28 - Ъ\r\n"
-                        + "29 - Ы\r\n"
-                        + "30 - Ь\r\n"
-                        + "31 - Э\r\n"
-                        + "32 - Ю\r\n"
-                        + "33 - Я\r\n"
+                return    "1  - А"+ Environment.NewLine
+                        + "2  - Б"+ Environment.NewLine
+                        + "3  - В"+ Environment.NewLine
+                        + "4  - Г"+ Environment.NewLine
+                        + "5  - Д"+ Environment.NewLine
+                        + "6  - Е"+ Environment.NewLine
+                        + "7  - Ё"+ Environment.NewLine
+                        + "8  - Ж"+ Environment.NewLine
+                        + "9  - З"+ Environment.NewLine
+                        + "10 - И"+ Environment.NewLine
+                        + "11 - Й"+ Environment.NewLine
+                        + "12 - К"+ Environment.NewLine
+                        + "13 - Л"+ Environment.NewLine
+                        + "14 - М"+ Environment.NewLine
+                        + "15 - Н"+ Environment.NewLine
+                        + "16 - О"+ Environment.NewLine
+                        + "17 - П"+ Environment.NewLine
+                        + "18 - Р"+ Environment.NewLine
+                        + "19 - С"+ Environment.NewLine
+                        + "20 - Т"+ Environment.NewLine
+                        + "21 - У"+ Environment.NewLine
+                        + "22 - Ф"+ Environment.NewLine
+                        + "23 - Х"+ Environment.NewLine
+                        + "24 - Ц"+ Environment.NewLine
+                        + "25 - Ч"+ Environment.NewLine
+                        + "26 - Ш"+ Environment.NewLine
+                        + "27 - Щ"+ Environment.NewLine
+                        + "28 - Ъ"+ Environment.NewLine
+                        + "29 - Ы"+ Environment.NewLine
+                        + "30 - Ь"+ Environment.NewLine
+                        + "31 - Э"+ Environment.NewLine
+                        + "32 - Ю"+ Environment.NewLine
+                        + "33 - Я"+ Environment.NewLine
                 ; 
             }
             public static string act_3() { return "И слово1 в большое-слово2 на НеПоНяТнОеСлОвО по слову из слова не слово, а слово, но слово"; }
@@ -156,9 +156,9 @@ namespace SuperGeroy.Tests
             // 8. ----------------------------------------
             public static string act_9() { return "Убрать               лишние   пробелы"; }
             public static string act_10() { 
-                return "Количество символов в начало строки\r\n"
-                    + "хм интересно, а здесь сколько символов?\r\n"
-                    + ",1+*-45=ХМ  интересно,  а  здесь  с к о л ь к о  символов?\r\n"
+                return "Количество символов в начало строки"+ Environment.NewLine
+                    + "хм интересно, а здесь сколько символов?" + Environment.NewLine
+                    + ",1+*-45=ХМ  интересно,  а  здесь  с к о л ь к о  символов?" + Environment.NewLine
                 ; 
             }
             public static string act_11() { return "Перевернуть строку: Я, оно, программа"; }
@@ -167,37 +167,37 @@ namespace SuperGeroy.Tests
             public static string act_14() { return "Rjulf-yb,elm z cjplfv ghjuhfvve rjnjhjz j[dfnbn dtcm VBH!"; }
             // 15. ----------------------------------------
             public static string act_16_18() { 
-                return    "ааааа бббб вввв цццц Дддд\r\n"
-                        + "бббб вввв цццц Дддд ааааа\r\n"
-                        + "вввв цццц Дддд ааааа бббб\r\n"
-                        + "цццц Дддд ааааа бббб вввв\r\n"
-                        + "Дддд ааааа бббб вввв цццц \r\n"
+                return    "ааааа бббб вввв цццц Дддд"+ Environment.NewLine
+                        + "бббб вввв цццц Дддд ааааа"+ Environment.NewLine
+                        + "вввв цццц Дддд ааааа бббб"+ Environment.NewLine
+                        + "цццц Дддд ааааа бббб вввв"+ Environment.NewLine
+                        + "Дддд ааааа бббб вввв цццц" + Environment.NewLine
                 ; 
             }
             public static string act_19_21() {
-                return "ааааа бббб вввв цццц Дддд\r\n"
-                        + "бббб вввв цццц Дддд ааааа\r\n"
-                        + "вввв цццц Дддд ааааа бббб\r\n"
-                        + "цццц Дддд ааааа бббб вввв\r\n"
-                        + "Дддд ааааа бббб вввв цццц \r\n"
+                return "ааааа бббб вввв цццц Дддд" + Environment.NewLine
+                        + "бббб вввв цццц Дддд ааааа"+ Environment.NewLine
+                        + "вввв цццц Дддд ааааа бббб"+ Environment.NewLine
+                        + "цццц Дддд ааааа бббб вввв"+ Environment.NewLine
+                        + "Дддд ааааа бббб вввв цццц" + Environment.NewLine
                 ;
             }
             public static string act_22_24() {
-                return "аяааяаа бцукббб вфавкнвв цфываццц яДчдхдзд\r\n"
-                        + "бцукббб вфавкнвв цфываццц яДчдхдзд аяааяаа\r\n"
-                        + "вфавкнвв цфываццц яДчдхдзд аяааяаа бцукббб\r\n"
-                        + "цфываццц яДчдхдзд аяааяаа бцукббб вфавкнвв\r\n"
-                        + "яДчдхдзд аяааяаа бцукббб вфавкнвв цфываццц \r\n"
+                return "аяааяаа бцукббб вфавкнвв цфываццц яДчдхдзд" + Environment.NewLine
+                        + "бцукббб вфавкнвв цфываццц яДчдхдзд аяааяаа"+ Environment.NewLine
+                        + "вфавкнвв цфываццц яДчдхдзд аяааяаа бцукббб"+ Environment.NewLine
+                        + "цфываццц яДчдхдзд аяааяаа бцукббб вфавкнвв"+ Environment.NewLine
+                        + "яДчдхдзд аяааяаа бцукббб вфавкнвв цфываццц" + Environment.NewLine
                 ;
             }
 
             // 25. ----------------------------------------
             public static string act_26_31() {
-                return "ааааа бббб вввв цццц Дддд\r\n"
-                        + "бббб вввв цццц Дддд ааааа\r\n"
-                        + "вввв цццц Дддд ааааа бббб\r\n"
-                        + "цццц Дддд ааааа бббб вввв\r\n"
-                        + "Дддд ааааа бббб вввв цццц \r\n"
+                return "ааааа бббб вввв цццц Дддд" + Environment.NewLine
+                        + "бббб вввв цццц Дддд ааааа"+ Environment.NewLine
+                        + "вввв цццц Дддд ааааа бббб"+ Environment.NewLine
+                        + "цццц Дддд ааааа бббб вввв"+ Environment.NewLine
+                        + "Дддд ааааа бббб вввв цццц" + Environment.NewLine
                 ;
             }
             // 32. ----------------------------------------
