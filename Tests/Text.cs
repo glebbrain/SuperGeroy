@@ -48,12 +48,12 @@ namespace SuperGeroy.Tests
             public static string url()
             {
                 return "ftp://test.ru"
-                            + Environment.NewLine + "http://test.ru"
-                            + Environment.NewLine + "https://test.ru"
-                            + Environment.NewLine + "https://test.ru?a=b"
-                            + Environment.NewLine + "https://test.ru&a=b"
-                            + Environment.NewLine + "https://test.ru/catalog/product/test"
-                            + Environment.NewLine + "https://test.ru/catalog/product/test?price=10&count=1"
+                            + Environment.NewLine + "фыафыва фыва http://test.ru фыа фыва фыва "
+                            + Environment.NewLine + "<a href=\"https://test.ru\">ссылка</a>"
+                            + Environment.NewLine + "sdfsdfsdf https://test.ru?a=b"
+                            + Environment.NewLine + "sdfsdf https://test.ru&a=b"
+                            + Environment.NewLine + "sdfsdhttps://test.ru/catalog/product/test"
+                            + Environment.NewLine + "dddhttps://test.ru/catalog/product/test?price=10&count=1"
                             + Environment.NewLine + "ws://test.ru/catalog/product/test?price=10&count=1"
                 ;
             }

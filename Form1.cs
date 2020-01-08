@@ -120,6 +120,9 @@ namespace SuperGeroy
             richTextBox1.Text = "";
             richTextBox2.Text = "";
             comboBox1.SelectedIndex = 0;
+            toolStripProgressBar1.Value = 0;
+            toolStripProgressBar1.Maximum = 100;
+            toolStripStatusLabel1.Text = "";
         }
         private static string SpecSimbolsCB(string text)
         {
